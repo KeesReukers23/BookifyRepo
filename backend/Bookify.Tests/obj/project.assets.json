@@ -4569,11 +4569,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitLab\\bookify\\Bookify.Tests\\Bookify.Tests.csproj",
+      "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Bookify.Tests\\Bookify.Tests.csproj",
       "projectName": "Bookify.Tests",
-      "projectPath": "C:\\GitLab\\bookify\\Bookify.Tests\\Bookify.Tests.csproj",
+      "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Bookify.Tests\\Bookify.Tests.csproj",
       "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-      "outputPath": "C:\\GitLab\\bookify\\Bookify.Tests\\obj\\",
+      "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Bookify.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4590,17 +4590,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj": {
-              "projectPath": "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj"
+            "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj": {
+              "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj"
             },
-            "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj": {
-              "projectPath": "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj"
+            "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj": {
+              "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj"
             },
-            "C:\\GitLab\\bookify\\Domain\\Logic.csproj": {
-              "projectPath": "C:\\GitLab\\bookify\\Domain\\Logic.csproj"
+            "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj": {
+              "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj"
             },
-            "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj": {
-              "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj"
+            "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj": {
+              "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj"
             }
           }
         }

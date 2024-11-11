@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NO2ntS2HmTdSS0mB/NQ2v6jMYpylBN3coW8chDIV6ldAx/T/F578nsxRd4sC8EuhHvuOdsRReaixzAx2Nn+bQw==",
+  "dgSpecHash": "0gCCPq3AykMLLOFNEyOTbn54nlLHl3jc7Rg1rwLxke8MWGxUSq6OVe4Hp8QWX+/X+cbD0FO+eJtXciuZ6CwKFg==",
   "success": true,
-  "projectFilePath": "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj",
+  "projectFilePath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\reuke\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

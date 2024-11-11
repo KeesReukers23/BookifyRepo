@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RALtQY4C+oc4QLLGAc+FWrTgtiVHCJipwz2BQkKi9/UBfIFZM05Mumyth4vIHrWRpbsUcYfitkzVnF+h+W1ZTA==",
+  "dgSpecHash": "LySqqwk8NazlH1sPwF/PszTMtSwr/OBKxX1/9X41zurf+q6xkSKqjffB/MNUudStt4ZfUMcKA6wauKZZWBH1hw==",
   "success": true,
-  "projectFilePath": "C:\\GitLab\\bookify\\Bookify.Tests\\Bookify.Tests.csproj",
+  "projectFilePath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Bookify.Tests\\Bookify.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\reuke\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

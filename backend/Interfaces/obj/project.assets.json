@@ -4054,11 +4054,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj",
+      "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj",
       "projectName": "Interfaces",
-      "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj",
+      "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj",
       "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-      "outputPath": "C:\\GitLab\\bookify\\Interfaces\\obj\\",
+      "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",

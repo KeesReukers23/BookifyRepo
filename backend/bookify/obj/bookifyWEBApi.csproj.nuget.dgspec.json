@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj": {}
+    "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj": {}
   },
   "projects": {
-    "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj": {
+    "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj",
+        "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj",
         "projectName": "bookifyWEBApi",
-        "projectPath": "C:\\GitLab\\bookify\\bookify\\bookifyWEBApi.csproj",
+        "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj",
         "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-        "outputPath": "C:\\GitLab\\bookify\\bookify\\obj\\",
+        "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,14 +28,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj": {
-                "projectPath": "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj"
+              "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj": {
+                "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj"
               },
-              "C:\\GitLab\\bookify\\Domain\\Logic.csproj": {
-                "projectPath": "C:\\GitLab\\bookify\\Domain\\Logic.csproj"
+              "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj": {
+                "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj"
               },
-              "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj"
+              "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj"
               }
             }
           }
@@ -117,14 +117,14 @@
         }
       }
     },
-    "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj": {
+    "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj",
+        "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\GitLab\\bookify\\DataAcces\\DataAccess.csproj",
+        "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-        "outputPath": "C:\\GitLab\\bookify\\DataAcces\\obj\\",
+        "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\DataAcces\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -141,8 +141,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj"
+              "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj"
               }
             }
           }
@@ -215,14 +215,14 @@
         }
       }
     },
-    "C:\\GitLab\\bookify\\Domain\\Logic.csproj": {
+    "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitLab\\bookify\\Domain\\Logic.csproj",
+        "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj",
         "projectName": "Logic",
-        "projectPath": "C:\\GitLab\\bookify\\Domain\\Logic.csproj",
+        "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\Logic.csproj",
         "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-        "outputPath": "C:\\GitLab\\bookify\\Domain\\obj\\",
+        "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -239,8 +239,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj": {
-                "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj"
+              "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj"
               }
             }
           }
@@ -309,14 +309,14 @@
         }
       }
     },
-    "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj": {
+    "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj",
+        "projectUniqueName": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj",
         "projectName": "Interfaces",
-        "projectPath": "C:\\GitLab\\bookify\\Interfaces\\Interfaces.csproj",
+        "projectPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\Interfaces.csproj",
         "packagesPath": "C:\\Users\\reuke\\.nuget\\packages\\",
-        "outputPath": "C:\\GitLab\\bookify\\Interfaces\\obj\\",
+        "outputPath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\Interfaces\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\reuke\\AppData\\Roaming\\NuGet\\NuGet.Config",
