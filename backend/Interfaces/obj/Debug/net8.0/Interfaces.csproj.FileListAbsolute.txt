@@ -1,0 +1,14 @@
+C:\GitLab\bookify\Interfaces\bin\Debug\net8.0\Interfaces.deps.json
+C:\GitLab\bookify\Interfaces\bin\Debug\net8.0\Interfaces.runtimeconfig.json
+C:\GitLab\bookify\Interfaces\bin\Debug\net8.0\Interfaces.dll
+C:\GitLab\bookify\Interfaces\bin\Debug\net8.0\Interfaces.pdb
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.csproj.AssemblyReference.cache
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.AssemblyInfoInputs.cache
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.AssemblyInfo.cs
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.csproj.CoreCompileInputs.cache
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.dll
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\refint\Interfaces.dll
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.pdb
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\Interfaces.genruntimeconfig.cache
+C:\GitLab\bookify\Interfaces\obj\Debug\net8.0\ref\Interfaces.dll

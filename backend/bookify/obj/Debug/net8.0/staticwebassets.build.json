@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "6mbDbFIiSTJ5ESTvBmBv7BmeRHKII04AyxHZo/i/2hY=",
+  "Source": "bookifyWEBApi",
+  "BasePath": "_content/bookifyWEBApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

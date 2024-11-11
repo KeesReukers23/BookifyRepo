@@ -1,0 +1,52 @@
+# .NET
+# Ignore build results
+/bin/
+/obj/
+/out/
+
+# User-specific files
+.vs/
+.vscode/
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows Installer Patch files
+*.pst
+
+# ASP.NET-specific files
+appsettings.json
+appsettings.Development.json
+
+# Log files
+*.log
+
+# NPM/Yarn
+node_modules/
+
+# Visual Studio for Mac
+.vscode/
+
+# React (TypeScript)
+# Ignore dependencies installed by npm/yarn
+node_modules/
+
+# Build output
+build/
+
+# VS Code specific files
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Miscellaneous
+*.bak
+*.swp
