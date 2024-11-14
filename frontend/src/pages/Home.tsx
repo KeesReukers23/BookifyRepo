@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
         }
     }, []);
 
-    const fetchUserPosts = async () => {
+    const fetchUserPosts = useCallback(async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
             return;
@@ -50,11 +51,11 @@ const Home: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
+    },[token, userId]);
 
     useEffect(() => {
         fetchUserPosts();
-    }, [token, userId]);
+    }, [token, userId, fetchUserPosts]);
 
     const handleCreatePost = async () => {
         if (!token || !userId) {
@@ -165,13 +166,14 @@ const Home: React.FC = () => {
                                     <h2>{post.title}</h2>
                                     <p>{post.review}</p>
                                     <small>Rating: {post.rating}</small>
-                                    <a 
-                                        className="delete-link" 
-                                        onClick={() => handleDeletePost(post.id.toString())} // Zorg ervoor dat je de ID als string doorgeeft
-                                        role="button"
+                                    <button
+                                        className="delete-link"
+                                        onClick={() => handleDeletePost(post.id.toString())}
+                                        aria-label="Delete post"
                                     >
                                         Delete
-                                    </a>
+                                    </button>
+
                                 </li>
                             ))}
                         </ul>
