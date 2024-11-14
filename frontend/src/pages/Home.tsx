@@ -24,7 +24,16 @@ const Home: React.FC = () => {
         }
     }, []);
 
+     // Fetch posts when token and userId are available
+     useEffect(() => {
+        if (token && userId) {
+            fetchUserPosts();
+        }
+    }, [token, userId]);
+
     const fetchUserPosts = async () => {
+        console.log('Fetching posts with token:', token);
+        console.log('Fetching posts for userId:', userId);
         if (!token || !userId) {
             console.error("User is not authenticated");
             return;
@@ -52,10 +61,6 @@ const Home: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        fetchUserPosts();
-    }, [token, userId]);
-
     const handleCreatePost = async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
@@ -63,7 +68,7 @@ const Home: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`https://localhost:7157/api/Post`, {
+            const response = await fetch(`http://localhost:5169/api/Post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,7 +97,7 @@ const Home: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`https://localhost:7157/api/Post/${postId}`, {
+            const response = await fetch(`http://localhost:5169/api/Post/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

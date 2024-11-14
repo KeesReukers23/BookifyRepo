@@ -56,16 +56,17 @@ namespace bookifyWEBApi.Controllers
             try
             {
                 User? user = await _userService.Login(loginRequestIM.Email, loginRequestIM.Password); //NULL if login failed.
-                UserEx userEx = new UserEx()
-                {
-                    UserId = user.UserId,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email
-                };
 
                 if (user != null)
                 {
+                    UserEx userEx = new UserEx()
+                    {
+                        UserId = user.UserId,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email
+                    };
+
                     string token = _jwtService.GenerateToken(user.UserId);
 
                     return Ok(new { Token = token, User = userEx });
