@@ -26,7 +26,7 @@ const Login: React.FC = () => {
   
     try {
       // Controleer of de juiste URL wordt gebruikt
-      const response = await axios.post('https://localhost:7157/login', {
+      const response = await axios.post('http://localhost:5169/login', {
         email,
         password,
       });

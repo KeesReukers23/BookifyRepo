@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
         setLoading(true);
         try {
-            const response = await fetch(`https://localhost:7157/api/Post/User/${userId}`, {
+            const response = await fetch(`http://localhost:5169/api/Post/User/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
