@@ -28,7 +28,7 @@
   {
     "ContainingType": "bookifyWEBApi.Controllers.PostController",
     "Method": "GetPostById",
-    "RelativePath": "api/Post/{id}",
+    "RelativePath": "api/Post/{postId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -36,11 +36,6 @@
       {
         "Name": "postId",
         "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -59,7 +54,7 @@
   {
     "ContainingType": "bookifyWEBApi.Controllers.PostController",
     "Method": "UpdatePost",
-    "RelativePath": "api/Post/{id}",
+    "RelativePath": "api/Post/{postId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -67,16 +62,11 @@
       {
         "Name": "postId",
         "Type": "System.Guid",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "postIM",
         "Type": "bookifyWEBApi.ImportModels.PostIM",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -85,7 +75,7 @@
   {
     "ContainingType": "bookifyWEBApi.Controllers.PostController",
     "Method": "DeletePost",
-    "RelativePath": "api/Post/{id}",
+    "RelativePath": "api/Post/{postId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -93,11 +83,6 @@
       {
         "Name": "postId",
         "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],

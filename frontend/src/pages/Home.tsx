@@ -93,6 +93,7 @@ const Home: React.FC = () => {
         }
 
         try {
+            console.log(`Deleting post with id ${postId}`);
             const response = await fetch(`http://localhost:5169/api/Post/${postId}`, {
                 method: 'DELETE',
                 headers: {
@@ -104,7 +105,6 @@ const Home: React.FC = () => {
                 throw new Error('Failed to delete post');
             }
 
-            // Hier is de wijziging: we gebruiken Number(postId) om het te vergelijken met post.id
             setPosts(posts.filter(post => post.id !== Number(postId)));
         } catch (error) {
             console.error(error);

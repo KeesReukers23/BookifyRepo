@@ -1,0 +1,31 @@
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    position: fixed; /* Zorgt ervoor dat de navbar vast bovenaan blijft */
+    top: 0;  /* Plaatst de navbar bovenaan */
+    left: 0;  /* Zorgt ervoor dat het aan de linkerkant begint */
+    width: 100%;  /* Maakt de navbar even breed als de pagina */
+    z-index: 1000;  /* Zorgt ervoor dat de navbar altijd boven andere elementen komt */
+  }
+  
+  .navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .navbar-item {
+    padding: 10px;
+  }
+  
+  .navbar-item a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar-item a:hover {
+    color: #f1f1f1;
+  }
+  
