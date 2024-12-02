@@ -9,6 +9,9 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add environment variables
+builder.Configuration.AddEnvironmentVariables();
+
 // Configureren van de databasecontext met User Secrets
 builder.Services.AddDbContext<BookifyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Bookify")));

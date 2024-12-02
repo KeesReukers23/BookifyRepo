@@ -36,7 +36,7 @@ const Login: React.FC = () => {
       localStorage.setItem('token', response.data.token); // Sla het token op in localStorage
       localStorage.setItem('user', JSON.stringify(response.data.user)); // Sla de gebruikersgegevens op in localStorage
       setSuccess('Login successful!');
-      navigate('/Home'); //naar Homepagina navigeren
+      navigate('/home'); //naar Homepagina navigeren
       
     } catch (error) {
       // Als er een fout optreedt
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" data-testid="login-button">Login</button>
       <button type="button" onClick={() => navigate('/register')} className="register-button">
         Go to Register
       </button>

@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Navbar from './pages/Navbar';
 
 
 
 const App: React.FC = () => {
     return (
         <Router>
-           
+           <Navbar />
             <Routes>
                 <Route path="/" element={<Navigate to="/Login" replace />} />
                 <Route path="/Home" element={<Home />} />

@@ -32,7 +32,7 @@ namespace bookifyWEBApi.Controllers
             }
 
             //Maak een lijst met Post exportmodels
-            var postEMs = posts.Select(post => new ExportModels.PostEx
+            var postEMs = posts.Select(post => new PostEx
             {
                 PostId = post.PostId,
                 CreatedAt = post.CreatedAt,
@@ -46,8 +46,8 @@ namespace bookifyWEBApi.Controllers
             return Ok(postEMs);
         }
 
-        // GET: api/posts/{id}
-        [HttpGet("{id}")]
+        // GET: api/posts/{postId}
+        [HttpGet("{postId}")]
 
         public async Task<ActionResult<IEnumerable<PostEx>>> GetPostById(Guid postId)
         {
@@ -84,8 +84,8 @@ namespace bookifyWEBApi.Controllers
             return CreatedAtAction(nameof(GetPostById), new { id = post.PostId }, post);
         }
 
-        //PUT: api/posts/{id}
-        [HttpPut("{id}")]
+        //PUT: api/posts/{postId}
+        [HttpPut("{postId}")]
         public async Task<ActionResult> UpdatePost(Guid postId, PostIM postIM)
         {
             Post post = new Post(postId, postIM.CreatedAt, postIM.Rating, postIM.Review, postIM.UserId, postIM.Title);
@@ -100,8 +100,8 @@ namespace bookifyWEBApi.Controllers
             return NoContent();
         }
 
-        //DELETE: api/posts/{id}   
-        [HttpDelete("{id}")]
+        //DELETE: api/posts/{postId}   
+        [HttpDelete("{postId}")]
         public async Task<ActionResult> DeletePost(Guid postId)
         {
             var post = await _postService.GetPostById(postId);

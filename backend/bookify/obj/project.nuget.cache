@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nqFHbzW9EazRLMNxoj/iL93OEmWMasVbOV5FaSSdzoU2QJR1tI2/1HmUPQeW//V6GHbDlOyLF6Oz2kuaPpDKIw==",
+  "dgSpecHash": "zCyD3OI/jat96v2Wzw9mKDqYSIcnV18DkTPwqzfHLg2nYUeIrrB07hPNZBMjoRStEYaZPattP9RMzAsllfHlSQ==",
   "success": true,
   "projectFilePath": "C:\\School\\Semester3\\GitHub\\BookifyRepo\\backend\\bookify\\bookifyWEBApi.csproj",
   "expectedPackageFiles": [
@@ -57,6 +57,7 @@
     "C:\\Users\\reuke\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\microsoft.typescript.msbuild\\5.6.2\\microsoft.typescript.msbuild.5.6.2.nupkg.sha512",
+    "C:\\Users\\reuke\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.6\\microsoft.visualstudio.azure.containers.tools.targets.1.19.6.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\reuke\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
