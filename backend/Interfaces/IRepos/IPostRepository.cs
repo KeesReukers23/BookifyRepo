@@ -1,6 +1,4 @@
-﻿using Interfaces.Models;
-
-namespace Interfaces.IRepos
+﻿namespace Interfaces.IRepos
 {
     public interface IPostRepository
     {

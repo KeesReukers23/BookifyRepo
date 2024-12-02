@@ -1,6 +1,6 @@
 ﻿using DataAcces;
+using Interfaces;
 using Interfaces.IRepos;
-using Interfaces.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repos

@@ -5,10 +5,9 @@
         public Guid PostId { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public float Rating { get; set; }
-        public string? Review { get; set; }
+        public string Review { get; set; } = string.Empty;
         public Guid UserId { get; private set; }
-
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         //Constructor for creating a new Post
         public Post(float rating, string review, Guid userId, string title)

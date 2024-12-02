@@ -15,7 +15,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Interfaces.Models.PostDto",
+        "Type": "Interfaces.PostDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

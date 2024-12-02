@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Interfaces.Models
+namespace Interfaces
 {
     public class PostDto
 
@@ -24,5 +24,7 @@ namespace Interfaces.Models
         public ICollection<CommentDto> Comments { get; set; } = null!;
 
         public ICollection<LikeDto> Likes { get; set; } = null!;
+
+        public ICollection<PostCollectionDto> PostCollections { get; set; } = new List<PostCollectionDto>();
     }
 }

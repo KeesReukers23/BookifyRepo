@@ -22,7 +22,27 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Interfaces.Models.CommentDto", b =>
+            modelBuilder.Entity("Interfaces.CollectionDto", b =>
+                {
+                    b.Property<Guid>("CollectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CollectionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Collection", (string)null);
+                });
+
+            modelBuilder.Entity("Interfaces.CommentDto", b =>
                 {
                     b.Property<Guid>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -50,7 +70,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Comment", (string)null);
                 });
 
-            modelBuilder.Entity("Interfaces.Models.LikeDto", b =>
+            modelBuilder.Entity("Interfaces.LikeDto", b =>
                 {
                     b.Property<Guid>("LikeId")
                         .ValueGeneratedOnAdd()
@@ -71,7 +91,22 @@ namespace DataAccess.Migrations
                     b.ToTable("Like", (string)null);
                 });
 
-            modelBuilder.Entity("Interfaces.Models.PostDto", b =>
+            modelBuilder.Entity("Interfaces.PostCollectionDto", b =>
+                {
+                    b.Property<Guid>("CollectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CollectionId", "PostId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostCollection", (string)null);
+                });
+
+            modelBuilder.Entity("Interfaces.PostDto", b =>
                 {
                     b.Property<Guid>("PostId")
                         .ValueGeneratedOnAdd()
@@ -100,7 +135,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Post", (string)null);
                 });
 
-            modelBuilder.Entity("Interfaces.Models.UserDto", b =>
+            modelBuilder.Entity("Interfaces.UserDto", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
@@ -126,15 +161,26 @@ namespace DataAccess.Migrations
                     b.ToTable("User", (string)null);
                 });
 
-            modelBuilder.Entity("Interfaces.Models.CommentDto", b =>
+            modelBuilder.Entity("Interfaces.CollectionDto", b =>
                 {
-                    b.HasOne("Interfaces.Models.PostDto", "Post")
+                    b.HasOne("Interfaces.UserDto", "user")
+                        .WithMany("Collections")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Interfaces.CommentDto", b =>
+                {
+                    b.HasOne("Interfaces.PostDto", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Interfaces.Models.UserDto", "User")
+                    b.HasOne("Interfaces.UserDto", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -145,15 +191,15 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Interfaces.Models.LikeDto", b =>
+            modelBuilder.Entity("Interfaces.LikeDto", b =>
                 {
-                    b.HasOne("Interfaces.Models.PostDto", "Post")
+                    b.HasOne("Interfaces.PostDto", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Interfaces.Models.UserDto", "User")
+                    b.HasOne("Interfaces.UserDto", "User")
                         .WithMany("Likes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -164,9 +210,28 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Interfaces.Models.PostDto", b =>
+            modelBuilder.Entity("Interfaces.PostCollectionDto", b =>
                 {
-                    b.HasOne("Interfaces.Models.UserDto", "User")
+                    b.HasOne("Interfaces.CollectionDto", "Collection")
+                        .WithMany("PostCollections")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Interfaces.PostDto", "Post")
+                        .WithMany("PostCollections")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Interfaces.PostDto", b =>
+                {
+                    b.HasOne("Interfaces.UserDto", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -175,15 +240,24 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Interfaces.Models.PostDto", b =>
+            modelBuilder.Entity("Interfaces.CollectionDto", b =>
+                {
+                    b.Navigation("PostCollections");
+                });
+
+            modelBuilder.Entity("Interfaces.PostDto", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
+
+                    b.Navigation("PostCollections");
                 });
 
-            modelBuilder.Entity("Interfaces.Models.UserDto", b =>
+            modelBuilder.Entity("Interfaces.UserDto", b =>
                 {
+                    b.Navigation("Collections");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
