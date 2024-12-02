@@ -56,6 +56,7 @@ namespace bookifyWEBApi.Controllers
             try
             {
                 User? user = await _userService.Login(loginRequestIM.Email, loginRequestIM.Password); //NULL if login failed.
+                if (user == null) { return Unauthorized("Invalid credentials."); }
                 UserEx userEx = new UserEx()
                 {
                     UserId = user.UserId,

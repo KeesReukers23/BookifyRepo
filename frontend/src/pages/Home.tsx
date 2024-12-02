@@ -93,7 +93,6 @@ const Home: React.FC = () => {
         }
 
         try {
-            console.log(`Deleting post with id ${postId}`);
             const response = await fetch(`http://localhost:5169/api/Post/${postId}`, {
                 method: 'DELETE',
                 headers: {
