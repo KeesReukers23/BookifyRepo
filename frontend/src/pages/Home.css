@@ -6,35 +6,45 @@
 
 header {
     text-align: center; /* Centrerend tekst */
-    margin-bottom: 20px; /* Ruimte onder de header */
 }
 
 .flex-container {
     display: flex; /* Flexbox voor zij-aan-zij positionering */
-    justify-content: center; /* Centreren van de containers */
+    justify-content: space-between;
+    align-items: stretch;
     gap: 40px; /* Ruimte tussen de containers */
-    flex-wrap: wrap; /* Zodat containers niet afgekapt worden */
 }
 
 .new-post-container,
-.friends-container,
 .posts-container {
     background: #f9f9f9; /* Lichte achtergrondkleur */
-    padding: 40px; /* Padding voor meer ruimte */
-    border-radius: 8px; /* Hoekafgeronde containers */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Zachte schaduw */
-    width: 400px; /* Vaste breedte voor containers */
-    min-height: 500px; /* Minimum hoogte om groter te maken */
-    overflow: hidden; /* Zorgt ervoor dat inhoud die te groot is niet zichtbaar is */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
     box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    flex: 1; /* Zorgt ervoor dat beide containers evenveel ruimte krijgen */
+    display: flex;
+    flex-direction: column;  /* Zodat de inhoud van de containers netjes boven elkaar wordt gepositioneerd */
+    justify-content: space-between;  /* Dit zorgt ervoor dat de inhoud netjes wordt verdeeld */
 }
 
+/* Verhoogde breedte voor posts-container */
+.posts-container {
+    width: 800px; /* Verhoog de breedte van de posts-container */
+    max-height: 500px; /* Maximale hoogte voor posts-container */
+    overflow-y: auto;  /* Maak de container scrollable */
+    padding-right: 10px; /* Optioneel: ruimte toevoegen aan de rechterkant */
+}
 
+/* Specifieke breedte voor de nieuwe post container */
+.new-post-container {
+    width: 500px; /* Specifieke breedte voor de Create a new post container */
+}
 
 /* Zorg ervoor dat titels niet worden afgekapt */
 .new-post-container h2,
-.posts-container h1,
-.friends-container h1 {
+.posts-container h1 {
     text-align: center; /* Titels centreren */
     font-size: 24px; /* Grotere tekstgrootte voor betere zichtbaarheid */
     white-space: nowrap; /* Voorkomt dat de tekst naar de volgende regel gaat */
@@ -118,6 +128,7 @@ button:hover {
     margin: 0 0 5px; /* Marges voor titel */
     font-size: 22px; /* Grotere tekstgrootte voor posttitels */
     color: #333; /* Kleur voor posttitels */
+    text-align: center;
 }
 
 .posts-container p {
@@ -125,6 +136,7 @@ button:hover {
     color: #555; /* Kleur voor tekst */
     line-height: 1.5; /* Verhoogde regelhoogte voor betere leesbaarheid */
     overflow-wrap: break-word; /* Zorgt ervoor dat lange woorden worden afgebroken */
+    text-align: center;
 }
 
 .posts-container small {
@@ -138,7 +150,7 @@ button:hover {
     color: #007bff; /* Subtiele blauwe kleur */
     cursor: pointer;
     font-size: 0.9rem;
-    margin: 0 5px;
+    margin: 0;
     padding: 0;
     text-decoration: underline;
 }
@@ -154,17 +166,15 @@ button:hover {
     justify-content: flex-end;
 }
 
-
 /* Media Queries Voor Responsiviteit */
 @media (max-width: 768px) {
     .flex-container {
         flex-direction: column; /* Stapelen op kleinere schermen */
         gap: 20px; /* Verminderde ruimte tussen de containers */
     }
-    
+
     .new-post-container,
-    .posts-container,
-    .friends-container {
+    .posts-container {
         width: 100%; /* Containers nemen volledige breedte in op kleine schermen */
     }
 }

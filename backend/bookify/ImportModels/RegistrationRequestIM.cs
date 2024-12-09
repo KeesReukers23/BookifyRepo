@@ -2,7 +2,7 @@
 
 namespace bookifyWEBApi.ImportModels
 {
-    public record RegistrationRequestIM
+    public record RegistrationRequestIm
 
     {
         [Required(ErrorMessage = "First name is required.")]

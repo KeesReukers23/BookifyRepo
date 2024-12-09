@@ -21,7 +21,7 @@ namespace bookifyWEBApi.Controllers
 
 
         [HttpPost("register")]
-        public async Task<ActionResult> Register([FromBody] RegistrationRequestIM registrationRequestIM)
+        public async Task<ActionResult> Register([FromBody] RegistrationRequestIm registrationRequestIM)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); } //validation errors
 
@@ -49,7 +49,7 @@ namespace bookifyWEBApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] LoginRequestIM loginRequestIM)
+        public async Task<ActionResult> Login([FromBody] LoginRequestIm loginRequestIM)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); } //validation errors
 

@@ -1,6 +1,6 @@
 ﻿namespace bookifyWEBApi.ImportModels
 {
-    public class PostIM
+    public class PostIm
     {
         public DateTime CreatedAt { get; set; }
         public float Rating { get; set; }

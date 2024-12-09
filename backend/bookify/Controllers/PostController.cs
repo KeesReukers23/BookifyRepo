@@ -69,24 +69,39 @@ namespace bookifyWEBApi.Controllers
                 Title = post.Title
             };
 
-            return Ok(post);
+            return Ok(postEx);
         }
 
         //POST: api/posts
         [HttpPost]
 
-        public async Task<ActionResult<PostDto>> CreatePost(PostIM postIM)
+        public async Task<ActionResult<PostDto>> CreatePost(PostIm postIM)
         {
             Post post = new Post(postIM.Rating, postIM.Review, postIM.UserId, postIM.Title);
 
             await _postService.AddPost(post);
 
-            return CreatedAtAction(nameof(GetPostById), new { id = post.PostId }, post);
+            // Zet de verkregen post om naar een PostEx-object
+            var postEx = new PostEx
+            {
+                PostId = post.PostId,
+                CreatedAt = post.CreatedAt,
+                Rating = post.Rating,
+                Review = post.Review,
+                UserId = post.UserId,
+                Title = post.Title
+            };
+
+            return CreatedAtAction(
+            nameof(GetPostById),
+            new { postId = post.PostId },
+            postEx);
+
         }
 
         //PUT: api/posts/{postId}
         [HttpPut("{postId}")]
-        public async Task<ActionResult> UpdatePost(Guid postId, PostIM postIM)
+        public async Task<ActionResult> UpdatePost(Guid postId, PostIm postIM)
         {
             Post post = new Post(postId, postIM.CreatedAt, postIM.Rating, postIM.Review, postIM.UserId, postIM.Title);
 

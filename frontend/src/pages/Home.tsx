@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import './Home.css';
+import Post from '../components/Post';
 
 const Home: React.FC = () => {
     const [posts, setPosts] = useState<any[]>([]);
@@ -18,14 +18,15 @@ const Home: React.FC = () => {
         if (userData) {
             const user = JSON.parse(userData);
             setFirstName(user.firstName);
-            setUserId(user.userId);  
+            setUserId(user.userId);
         }
         if (storedToken) {
             setToken(storedToken);
         }
     }, []);
 
-    const fetchUserPosts = useCallback(async () => {
+    const fetchUserPosts = async () => {
+        console.log({ token, userId });
         if (!token || !userId) {
             console.error("User is not authenticated");
             return;
@@ -51,12 +52,15 @@ const Home: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    },[token, userId]);
+    };
 
     useEffect(() => {
-        fetchUserPosts();
-    }, [token, userId, fetchUserPosts]);
+        if (userId && token) {
+            fetchUserPosts(); // Pas wanneer beide aanwezig zijn
+        }
+    }, [token, userId]);
 
+    // Create a new post
     const handleCreatePost = async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
@@ -77,15 +81,26 @@ const Home: React.FC = () => {
                 throw new Error('Failed to create post');
             }
 
+            const newPost = await response.json();
+            console.log("New Post created: ", newPost);
+
+            // Voeg de nieuwe post toe aan de begin van de lijst
+            setPosts(prevPosts => {
+                const updatedPosts = [newPost, ...prevPosts];
+                console.log("Updated posts after new post: ", updatedPosts);  // Log de bijgewerkte lijst
+                return updatedPosts;
+            });
+
+            // Reset input fields
             setTitle('');
             setReview('');
             setRating(0);
-            fetchUserPosts();
         } catch (error) {
             console.error(error);
         }
     };
 
+    // Delete a post
     const handleDeletePost = async (postId: string) => {
         if (!token) {
             console.error("User is not authenticated");
@@ -104,16 +119,18 @@ const Home: React.FC = () => {
                 throw new Error('Failed to delete post');
             }
 
-            setPosts(posts.filter(post => post.id !== Number(postId)));
+            setPosts(posts.filter(post => post.postId !== postId));
         } catch (error) {
             console.error(error);
         }
     };
 
+    // Rating
     const handleRating = (rate: number) => {
         setRating(rate);
     };
 
+    // Page layout
     return (
         <div className="container">
             <header>
@@ -124,27 +141,27 @@ const Home: React.FC = () => {
                 <section className="new-post-container">
                     <h2>Create a New Post</h2>
                     <div className="form-group">
-                        <input 
-                            type="text" 
-                            placeholder="Book Title" 
-                            value={title} 
-                            onChange={(e) => setTitle(e.target.value)} 
+                        <input
+                            type="text"
+                            placeholder="Book Title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             required
                         />
                     </div>
                     <div className="form-group">
-                        <textarea 
-                            placeholder="What did you think of the book?" 
-                            value={review} 
-                            onChange={(e) => setReview(e.target.value)} 
+                        <textarea
+                            placeholder="What did you think of the book?"
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
                             required
                         />
                     </div>
                     <div className="form-group rating">
                         {[1, 2, 3, 4, 5].map((rate) => (
-                            <span 
-                                key={rate} 
-                                className={`star ${rate <= rating ? 'selected' : ''}`} 
+                            <span
+                                key={rate}
+                                className={`star ${rate <= rating ? 'selected' : ''}`}
                                 onClick={() => handleRating(rate)}
                             >
                                 ★
@@ -161,27 +178,19 @@ const Home: React.FC = () => {
                     ) : (
                         <ul>
                             {posts.map((post) => (
-                                <li key={post.id}>
-                                    <h2>{post.title}</h2>
-                                    <p>{post.review}</p>
-                                    <small>Rating: {post.rating}</small>
-                                    <button
-                                        className="delete-link"
-                                        onClick={() => handleDeletePost(post.id.toString())}
-                                        aria-label="Delete post"
-                                    >
-                                        Delete
-                                    </button>
-
+                                <li key={post.postId}>
+                                    <Post
+                                        postId={post.postId}
+                                        title={post.title}
+                                        review={post.review}
+                                        rating={post.rating}
+                                        onDelete={() => { handleDeletePost(post.postId); }}
+                                        onAddToCollection={() => { console.log('Add to collection'); }}
+                                    />
                                 </li>
                             ))}
                         </ul>
                     )}
-                </section>
-
-                <section className="friends-container">
-                    <h1>Your Friends</h1>
-                    <p>List of friends will be displayed here.</p>
                 </section>
             </div>
         </div>

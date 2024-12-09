@@ -1,6 +1,4 @@
-﻿using bookifyWEBApi.ExportModels;
-using bookifyWEBApi.ExtensionMethods;
-using bookifyWEBApi.ImportModels;
+﻿using bookifyWEBApi.ImportModels;
 using Logic.Entities;
 using Logic.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +21,7 @@ namespace bookifyWEBApi.Controllers
 
         // GET: api/Collection/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<CollectionEx>> GetCollectionByIdAsync(Guid id)
+        public async Task<ActionResult<Collection>> GetCollectionByIdAsync(Guid id)
         {
             Collection collection = await _collectionService.GetCollectionByIdAsync(id);
             if (collection == null)
@@ -31,12 +29,12 @@ namespace bookifyWEBApi.Controllers
                 return NotFound();
             }
 
-            return Ok(collection.ToCollectionEx());
+            return Ok(collection);
         }
 
         //GET: api/Collection/user/{userId} 
         [HttpGet("byUser/{userId}")]
-        public async Task<ActionResult<IEnumerable<CollectionEx>>> GetCollectionsByUserIdAsync(Guid userId)
+        public async Task<ActionResult<IEnumerable<Collection>>> GetCollectionsByUserIdAsync(Guid userId)
         {
             var collections = await _collectionService.GetAllCollectionsByUserIdAsync(userId);
             if (collections == null || !collections.Any())
@@ -44,21 +42,21 @@ namespace bookifyWEBApi.Controllers
                 return NotFound("No collections found for this user.");
             }
 
-            var collectionEMs = collections.Select(collection => collection.ToCollectionEx()).ToList();
-            return Ok(collectionEMs);
+            return Ok(collections);
         }
 
         //POST: api/Collection
         [HttpPost]
-        public async Task<ActionResult<CollectionEx>> CreateCollectionAsync([FromBody] CollectionIM collectionIM)
+        public async Task<ActionResult<Collection>> CreateCollectionAsync([FromBody] CollectionIm collectionIm)
         {
-            if (collectionIM == null || string.IsNullOrWhiteSpace(collectionIM.Name))
+            if (collectionIm == null || string.IsNullOrWhiteSpace(collectionIm.Name))
             {
                 return BadRequest("Collection name cannot be empty.");
             }
 
-            Collection collection = await _collectionService.CreateCollectionAsync(collectionIM.Name, collectionIM.UserId);
-            return CreatedAtAction(nameof(GetCollectionByIdAsync), new { id = collection.CollectionId }, collection.ToCollectionEx());
+            Collection collection = await _collectionService.CreateCollectionAsync(collectionIm.Name, collectionIm.UserId);
+
+            return CreatedAtAction(nameof(GetCollectionByIdAsync), new { id = collection.CollectionId }, collection);
         }
 
         //DELETE: api/Collection/{id}

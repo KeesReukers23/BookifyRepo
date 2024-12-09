@@ -1,0 +1,61 @@
+/* Algemene knoppenstijl */
+button {
+    margin-top: 8px;
+    padding: 8px 16px; /* Kleinere padding voor meer compacte knoppen */
+    border: 1px solid #ccc; /* Lichte rand om de knop */
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px; /* Ronde hoeken */
+    background-color: #f0f0f0; /* Lichtgrijze achtergrondkleur */
+    color: #333; /* Donkere tekstkleur */
+    transition: background-color 0.2s ease; /* Eenvoudige overgang bij hover */
+}
+
+/* Knoppen in de action-buttons-container */
+.action-buttons-container {
+    display: flex; /* Zorgt ervoor dat de knoppen naast elkaar staan */
+    gap: 10px; /* Ruimte tussen de knoppen */
+    justify-content: flex-end; /* Zorgt ervoor dat de knoppen aan de rechterkant staan */
+    margin-top: 10px; /* Ruimte boven de knoppen */
+}
+
+/* Specifieke styling voor de delete-knop */
+.action-buttons-container .delete-button {
+    background-color: #ffcccc; /* Lichtrode achtergrondkleur voor delete-knop */
+    color: #b30000; /* Donkerrode tekstkleur */
+}
+
+/* Specifieke styling voor de add-to-collection knop */
+.action-buttons-container .add-to-collection-button {
+    background-color: #ccffcc; /* Lichtgroene achtergrondkleur voor add-to-collection knop */
+    color: #006600; /* Donkergroene tekstkleur */
+}
+
+/* Hover effect voor knoppen */
+.action-buttons-container button:hover {
+    background-color: #e0e0e0; /* Lichtgrijs bij hover voor alle knoppen */
+}
+
+/* Donkerder bij hover voor delete-knop */
+.action-buttons-container .delete-button:hover {
+    background-color: #ff9999; /* Donkerder rood bij hover */
+}
+
+/* Donkerder bij hover voor add-to-collection knop */
+.action-buttons-container .add-to-collection-button:hover {
+    background-color: #99cc99; /* Donkerder groen bij hover */
+}
+/* Rating */
+.rating {
+    font-size: 20px;
+    color: gold; /* Standaard kleur voor de sterren (goud) */
+}
+
+.filled {
+    color: gold; /* Gekleurde sterren (gevuld) */
+}
+
+.empty {
+    color: lightgray; /* Lege sterren (lichtgrijs) */
+}
+
