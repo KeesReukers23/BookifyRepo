@@ -7,6 +7,7 @@
 
         Task<PostDto?> GetPostByIdAsync(Guid postId);
         Task<IEnumerable<PostDto>> GetAllPostsFromUserAsync(Guid UserId);
+        Task<IEnumerable<PostDto>> GetPostsByCollectionIdAsync(Guid collectionId);
 
         Task<bool> UpdatePostAsync(PostDto dto);
 

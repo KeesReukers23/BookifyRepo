@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './Home.css';
+import Navbar from './Navbar';
 import Post from '../components/Post';
 
 const Home: React.FC = () => {
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
     const [rating, setRating] = useState<number>(0);
     const [userId, setUserId] = useState<string | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [formError, setFormError] = useState<string>('');
 
     useEffect(() => {
         const userData = localStorage.getItem('user');
@@ -25,8 +27,8 @@ const Home: React.FC = () => {
         }
     }, []);
 
-    const fetchUserPosts = async () => {
-        console.log({ token, userId });
+    // Gebruik useCallback om de fetchUserPosts functie stabiel te maken
+    const fetchUserPosts = useCallback(async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
             return;
@@ -37,8 +39,8 @@ const Home: React.FC = () => {
             const response = await fetch(`http://localhost:5169/api/Post/User/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    'Authorization': `Bearer ${token}`,
+                },
             });
 
             if (!response.ok) {
@@ -52,18 +54,33 @@ const Home: React.FC = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [token, userId]);
 
+    // De useEffect afhankelijkheden moeten alleen token en userId zijn
     useEffect(() => {
         if (userId && token) {
-            fetchUserPosts(); // Pas wanneer beide aanwezig zijn
+            fetchUserPosts(); // Deze functie wordt alleen uitgevoerd als token en userId aanwezig zijn
         }
-    }, [token, userId]);
+    }, [token, userId, fetchUserPosts]);
+
+
+    const validateForm = () => {
+        if (title === '' || review === '' || rating === 0) {
+            setFormError('Please fill in all fields');
+            return false;
+        }
+        setFormError('');
+        return true;
+    };
 
     // Create a new post
     const handleCreatePost = async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
+            return;
+        }
+
+        if (!validateForm()) {
             return;
         }
 
@@ -132,66 +149,71 @@ const Home: React.FC = () => {
 
     // Page layout
     return (
-        <div className="container">
-            <header>
-                <h1>Welcome{firstName ? `, ${firstName}` : ""}!</h1>
-            </header>
+        <div>
+            <Navbar />
+            <div className="container">
+                <header>
+                    <h1>Welcome{firstName ? `, ${firstName}` : ""}!</h1>
+                </header>
 
-            <div className="flex-container">
-                <section className="new-post-container">
-                    <h2>Create a New Post</h2>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            placeholder="Book Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <textarea
-                            placeholder="What did you think of the book?"
-                            value={review}
-                            onChange={(e) => setReview(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group rating">
-                        {[1, 2, 3, 4, 5].map((rate) => (
-                            <span
-                                key={rate}
-                                className={`star ${rate <= rating ? 'selected' : ''}`}
-                                onClick={() => handleRating(rate)}
-                            >
-                                ★
-                            </span>
-                        ))}
-                    </div>
-                    <button onClick={handleCreatePost}>Submit</button>
-                </section>
+                <div className="flex-container">
+                    <section className="new-post-container">
+                        <h2>Create a New Post</h2>
 
-                <section className="posts-container">
-                    <h1>Your Posts</h1>
-                    {loading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <ul>
-                            {posts.map((post) => (
-                                <li key={post.postId}>
-                                    <Post
-                                        postId={post.postId}
-                                        title={post.title}
-                                        review={post.review}
-                                        rating={post.rating}
-                                        onDelete={() => { handleDeletePost(post.postId); }}
-                                        onAddToCollection={() => { console.log('Add to collection'); }}
-                                    />
-                                </li>
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Book Title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <textarea
+                                placeholder="What did you think of the book?"
+                                value={review}
+                                onChange={(e) => setReview(e.target.value)}
+                                required
+                            />
+                        </div>
+                        {formError && <p className="error">{formError}</p>} {/* Foutmelding als er een validatiefout is */}
+                        <div className="form-group rating">
+                            {[1, 2, 3, 4, 5].map((rate) => (
+                                <span
+                                    key={rate}
+                                    className={`star ${rate <= rating ? 'selected' : ''}`}
+                                    onClick={() => handleRating(rate)}
+                                >
+                                    ★
+                                </span>
                             ))}
-                        </ul>
-                    )}
-                </section>
+                        </div>
+                        <button onClick={handleCreatePost}>Submit</button>
+                    </section>
+
+                    <section className="posts-container">
+                        <h1>Your Posts</h1>
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            <ul>
+                                {posts.map((post) => (
+                                    <li key={post.postId}>
+                                        <Post
+                                            postId={post.postId}
+                                            title={post.title}
+                                            review={post.review}
+                                            rating={post.rating}
+                                            onDelete={() => { handleDeletePost(post.postId); }}
+                                            onAddToCollection={() => { console.log('Add to collection'); }}
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </section>
+                </div>
             </div>
         </div>
     );

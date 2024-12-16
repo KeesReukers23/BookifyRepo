@@ -74,5 +74,13 @@ namespace DataAccess.Repos
 
             return true;
         }
+
+        public async Task<IEnumerable<PostDto>> GetPostsByCollectionIdAsync(Guid collectionId)
+        {
+            return await _context.PostCollections
+            .Where(pc => pc.CollectionId == collectionId)
+            .Select(pc => pc.Post)
+            .ToListAsync();
+        }
     }
 }

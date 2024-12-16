@@ -8,17 +8,17 @@ namespace Logic.Services
     {
 
         private readonly ICollectionRepository _collectionRepository;
-        private readonly IPostCollectionRepository _postCollectionRepository;
 
-        public CollectionService(ICollectionRepository collectionRepository, IPostCollectionRepository postCollectionRepository)
+
+        public CollectionService(ICollectionRepository collectionRepository)
         {
             _collectionRepository = collectionRepository;
-            _postCollectionRepository = postCollectionRepository;
         }
 
-        public async Task<Collection> GetCollectionByIdAsync(Guid collectionId)
+        public async Task<Collection?> GetCollectionByIdAsync(Guid collectionId)
         {
-            CollectionDto dto = await _collectionRepository.GetByIdAsync(collectionId);
+            CollectionDto? dto = await _collectionRepository.GetByIdAsync(collectionId);
+            if (dto == null) return null;
             return dto.ToCollection();
         }
 

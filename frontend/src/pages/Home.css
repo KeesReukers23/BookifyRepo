@@ -1,7 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px; /* Stel een vaste hoogte in voor de navbar */
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed; /* Maak de navbar vast aan de bovenkant van de pagina */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
 .container {
     max-width: 1400px; /* Totale breedte van de container */
     margin: 0 auto; /* Centraal uitlijnen */
     box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
 }
 
 header {
@@ -21,7 +43,7 @@ header {
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    min-height: 500px;
+    height: 700px; /* Stel een vaste hoogte in voor beide containers */
     box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
     flex: 1; /* Zorgt ervoor dat beide containers evenveel ruimte krijgen */
     display: flex;
@@ -32,14 +54,20 @@ header {
 /* Verhoogde breedte voor posts-container */
 .posts-container {
     width: 800px; /* Verhoog de breedte van de posts-container */
-    max-height: 500px; /* Maximale hoogte voor posts-container */
+    height: 700px; /* Stel dezelfde hoogte in als de new-post-container */
     overflow-y: auto;  /* Maak de container scrollable */
     padding-right: 10px; /* Optioneel: ruimte toevoegen aan de rechterkant */
+    margin-top: 0 !important; /* Verwijder de margin-top met !important */
+    padding: 60px; /* Verhoog de padding */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
 }
 
 /* Specifieke breedte voor de nieuwe post container */
 .new-post-container {
     width: 500px; /* Specifieke breedte voor de Create a new post container */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+    height: 700px; /* Stel dezelfde hoogte in als de posts-container */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
 }
 
 /* Zorg ervoor dat titels niet worden afgekapt */
@@ -50,6 +78,32 @@ header {
     white-space: nowrap; /* Voorkomt dat de tekst naar de volgende regel gaat */
     overflow: visible; /* Verbergt overtollige tekst niet */
     text-overflow: ellipsis; /* Zet '...' als de tekst te lang is */
+}
+
+.new-post-container h2 {
+    margin-bottom: 20px; /* Voeg ruimte toe onder de titel */
+}
+
+.new-post-container .form-group input,
+.new-post-container .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.new-post-container .rating {
+    margin: 30px 0; /* Voeg meer marge toe boven en onder de sterren */
+}
+
+.new-post-container button {
+    padding: 15px; /* Verhoog de padding binnen de knop */
+    margin-top: 20px; /* Verhoog de marge boven de knop */
+}
+
+.new-post-container .form-group {
+    margin-bottom: 20px; /* Verhoog de marge tussen invoervelden */
 }
 
 .form-group {
@@ -65,7 +119,7 @@ header {
 
 .form-group textarea {
     resize: none; /* Voorkomt dat het tekstgebied kan worden vergroot of verkleind door de gebruiker */
-    min-height: 100px; /* Minimale hoogte voor het tekstgebied */
+    min-height: 200px; /* Verhoog de minimale hoogte van het tekstgebied */
 }
 
 .rating {
@@ -114,7 +168,7 @@ button:hover {
 .posts-container li {
     border: 1px solid #ddd; /* Lichte rand voor elk bericht */
     border-radius: 5px; /* Hoekafgerond */
-    margin: 10px 0; /* Ruimte tussen de berichten */
+    margin: 20px 0; /* Verhoog de ruimte tussen de berichten */
     padding: 20px; /* Vergrote padding binnen het bericht */
     background-color: #fff; /* Achtergrondkleur van de berichten */
     transition: box-shadow 0.2s; /* Voegt een overgangseffect toe */
@@ -164,6 +218,15 @@ button:hover {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+}
+
+.error {
+    color: red; /* Rood voor de foutmelding */
+    opacity: 60;
+    font-weight: bold; /* Maak de tekst vet */
+    text-align: center; /* Centreer de tekst */
+    margin: 10px 0; /* Ruimte boven en onder de foutmelding */
+    padding: 10px; /* Voeg wat padding toe voor visuele ruimte */
 }
 
 /* Media Queries Voor Responsiviteit */

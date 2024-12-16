@@ -15,6 +15,19 @@ namespace Logic.Services
             _postRepository = postRepository;
         }
 
+
+        public async Task<IEnumerable<Post>> GetPostsByCollectionIdAsync(Guid collectionId)
+        {
+            IEnumerable<PostDto> postDtos = await _postRepository.GetPostsByCollectionIdAsync(collectionId);
+            if (postDtos == null)
+            {
+                return Enumerable.Empty<Post>();
+            }
+
+            IEnumerable<Post> posts = postDtos.Select(dto => dto.ToPost());
+            return posts;
+        }
+
         public async Task<Guid?> AddPost(Post post)
         {
             PostDto dto = post.toDto();
@@ -57,6 +70,8 @@ namespace Logic.Services
             var posts = postDtos.Select(dto => dto.ToPost());
             return posts;
         }
+
+
 
     }
 }

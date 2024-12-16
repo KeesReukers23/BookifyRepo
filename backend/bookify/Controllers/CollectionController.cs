@@ -20,10 +20,11 @@ namespace bookifyWEBApi.Controllers
         }
 
         // GET: api/Collection/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCollectionById")]
         public async Task<ActionResult<Collection>> GetCollectionByIdAsync(Guid id)
         {
-            Collection collection = await _collectionService.GetCollectionByIdAsync(id);
+            Collection? collection = await _collectionService.GetCollectionByIdAsync(id);
+
             if (collection == null)
             {
                 return NotFound();
@@ -45,6 +46,20 @@ namespace bookifyWEBApi.Controllers
             return Ok(collections);
         }
 
+        // GET: api/Collection/{id}/posts
+        [HttpGet("{id}/posts")]
+        public async Task<ActionResult<IEnumerable<Post>>> GetPostsByCollectionId(Guid CollectionId)
+        {
+            var posts = await _postService.GetPostsByCollectionIdAsync(CollectionId);
+
+            if (posts == null || !posts.Any())
+            {
+                return NotFound("No posts found for this collection.");
+            }
+
+            return Ok(posts);
+        }
+
         //POST: api/Collection
         [HttpPost]
         public async Task<ActionResult<Collection>> CreateCollectionAsync([FromBody] CollectionIm collectionIm)
@@ -56,8 +71,18 @@ namespace bookifyWEBApi.Controllers
 
             Collection collection = await _collectionService.CreateCollectionAsync(collectionIm.Name, collectionIm.UserId);
 
-            return CreatedAtAction(nameof(GetCollectionByIdAsync), new { id = collection.CollectionId }, collection);
+            // Genereer de URL van de collectie
+            string? url = Url.RouteUrl("GetCollectionById", new { id = collection.CollectionId });
+
+            if (url == null)
+            {
+                return StatusCode(500, "Error generating the collection URL.");
+            }
+
+            // Geef de URL van de collectie en de collectie zelf terug
+            return Created(url, collection);
         }
+
 
         //DELETE: api/Collection/{id}
         [HttpDelete("{id}")]
@@ -72,5 +97,7 @@ namespace bookifyWEBApi.Controllers
 
             return NoContent();
         }
+
+
     }
 }
