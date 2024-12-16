@@ -83,6 +83,28 @@ namespace bookifyWEBApi.Controllers
             return Created(url, collection);
         }
 
+        // POST api/Collection/AddPostToCollection
+        [HttpPost("AddPostToCollection")]
+        public async Task<IActionResult> AddPostToCollection([FromBody] AddToCollectionIm request)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            try
+            {
+                // Voeg de post toe aan de collectie via de service
+                await _postService.AddPostToCollectionAsync(request.CollectionId, request.PostId);
+                return Ok("Post added to collection successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
 
         //DELETE: api/Collection/{id}
         [HttpDelete("{id}")]

@@ -12,5 +12,7 @@
         Task<bool> UpdatePostAsync(PostDto dto);
 
         Task<bool> DeletePostAsync(Guid postId);
+
+        Task AddPostToCollectionAsync(Guid postId, Guid collectionId);
     }
 }

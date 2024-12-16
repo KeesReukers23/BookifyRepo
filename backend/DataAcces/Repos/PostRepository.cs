@@ -82,5 +82,32 @@ namespace DataAccess.Repos
             .Select(pc => pc.Post)
             .ToListAsync();
         }
+
+        public async Task AddPostToCollectionAsync(Guid collectionId, Guid postId)
+        {
+            var collection = await _context.Collections
+                .Include(c => c.PostCollections)
+                .FirstOrDefaultAsync(c => c.CollectionId == collectionId);
+
+            var post = await _context.Posts
+                .FirstOrDefaultAsync(p => p.PostId == postId);
+
+            if (collection == null || post == null)
+            {
+                throw new ArgumentException("Collection or Post not found.");
+            }
+
+            var postCollection = new PostCollectionDto
+            {
+                CollectionId = collection.CollectionId,
+                PostId = post.PostId
+            };
+
+            collection.PostCollections.Add(postCollection);
+
+            await _context.SaveChangesAsync();
+        }
+
+
     }
 }

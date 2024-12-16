@@ -28,6 +28,11 @@ namespace Logic.Services
             return posts;
         }
 
+        public async Task AddPostToCollectionAsync(Guid postId, Guid collectionId)
+        {
+            await _postRepository.AddPostToCollectionAsync(postId, collectionId);
+        }
+
         public async Task<Guid?> AddPost(Post post)
         {
             PostDto dto = post.toDto();

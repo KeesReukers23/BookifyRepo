@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Home.css';
 import Navbar from './Navbar';
-import Post from '../components/Post';
+import CollectionModal from './CollectionModal';
 
-const Home: React.FC = () => {
-    const [posts, setPosts] = useState<any[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+const Home = () => {
     const [firstName, setFirstName] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [posts, setPosts] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
     const [title, setTitle] = useState<string>('');
     const [review, setReview] = useState<string>('');
     const [rating, setRating] = useState<number>(0);
-    const [userId, setUserId] = useState<string | null>(null);
-    const [token, setToken] = useState<string | null>(null);
     const [formError, setFormError] = useState<string>('');
 
     useEffect(() => {
@@ -27,7 +29,6 @@ const Home: React.FC = () => {
         }
     }, []);
 
-    // Gebruik useCallback om de fetchUserPosts functie stabiel te maken
     const fetchUserPosts = useCallback(async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
@@ -56,13 +57,44 @@ const Home: React.FC = () => {
         }
     }, [token, userId]);
 
-    // De useEffect afhankelijkheden moeten alleen token en userId zijn
     useEffect(() => {
-        if (userId && token) {
-            fetchUserPosts(); // Deze functie wordt alleen uitgevoerd als token en userId aanwezig zijn
+        if (token && userId) {
+            fetchUserPosts();
         }
     }, [token, userId, fetchUserPosts]);
+    
+    const handleAddToCollection = (postId: string) => {
+        setSelectedPostId(postId);
+        setShowModal(true);
+    };
 
+    const handleCloseModal = () => {   
+        setShowModal(false);
+        setSelectedPostId(null);
+    };
+
+    const handleAddPostToCollection = async (collectionId: string) => {
+        if (!selectedPostId || !token) return;
+
+        try {
+            const response = await fetch(`http://localhost:5169/api/Collection/AddPostToCollection`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ collectionId, postId: selectedPostId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add post to collection');
+            }
+
+            handleCloseModal();
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const validateForm = () => {
         if (title === '' || review === '' || rating === 0) {
@@ -73,7 +105,6 @@ const Home: React.FC = () => {
         return true;
     };
 
-    // Create a new post
     const handleCreatePost = async () => {
         if (!token || !userId) {
             console.error("User is not authenticated");
@@ -85,13 +116,13 @@ const Home: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5169/api/Post`, {
+            const response = await fetch('http://localhost:5169/api/Post', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ title, review, rating, userId })
+                body: JSON.stringify({ title, review, rating, userId }),
             });
 
             if (!response.ok) {
@@ -99,16 +130,7 @@ const Home: React.FC = () => {
             }
 
             const newPost = await response.json();
-            console.log("New Post created: ", newPost);
-
-            // Voeg de nieuwe post toe aan de begin van de lijst
-            setPosts(prevPosts => {
-                const updatedPosts = [newPost, ...prevPosts];
-                console.log("Updated posts after new post: ", updatedPosts);  // Log de bijgewerkte lijst
-                return updatedPosts;
-            });
-
-            // Reset input fields
+            setPosts([...posts, newPost]);
             setTitle('');
             setReview('');
             setRating(0);
@@ -117,7 +139,6 @@ const Home: React.FC = () => {
         }
     };
 
-    // Delete a post
     const handleDeletePost = async (postId: string) => {
         if (!token) {
             console.error("User is not authenticated");
@@ -142,12 +163,18 @@ const Home: React.FC = () => {
         }
     };
 
-    // Rating
-    const handleRating = (rate: number) => {
-        setRating(rate);
+    const renderStars = (rating: number) => {
+        return (
+            <div className="rating">
+                {[1, 2, 3, 4, 5].map((rate) => (
+                    <span key={rate} className={`star ${rate <= rating ? 'selected' : ''}`}>
+                        ★
+                    </span>
+                ))}
+            </div>
+        );
     };
-
-    // Page layout
+    
     return (
         <div>
             <Navbar />
@@ -159,31 +186,29 @@ const Home: React.FC = () => {
                 <div className="flex-container">
                     <section className="new-post-container">
                         <h2>Create a New Post</h2>
-
+                        {/* Form for creating a new post */}
                         <div className="form-group">
                             <input
                                 type="text"
-                                placeholder="Book Title"
+                                placeholder="Title"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
-                                required
                             />
                         </div>
                         <div className="form-group">
                             <textarea
-                                placeholder="What did you think of the book?"
+                                placeholder="Review"
                                 value={review}
                                 onChange={(e) => setReview(e.target.value)}
-                                required
                             />
                         </div>
-                        {formError && <p className="error">{formError}</p>} {/* Foutmelding als er een validatiefout is */}
+                        {formError && <p className="error">{formError}</p>}
                         <div className="form-group rating">
                             {[1, 2, 3, 4, 5].map((rate) => (
                                 <span
                                     key={rate}
                                     className={`star ${rate <= rating ? 'selected' : ''}`}
-                                    onClick={() => handleRating(rate)}
+                                    onClick={() => setRating(rate)}
                                 >
                                     ★
                                 </span>
@@ -193,21 +218,20 @@ const Home: React.FC = () => {
                     </section>
 
                     <section className="posts-container">
-                        <h1>Your Posts</h1>
+                        <h2>Your Posts</h2>
                         {loading ? (
                             <p>Loading...</p>
                         ) : (
                             <ul>
                                 {posts.map((post) => (
-                                    <li key={post.postId}>
-                                        <Post
-                                            postId={post.postId}
-                                            title={post.title}
-                                            review={post.review}
-                                            rating={post.rating}
-                                            onDelete={() => { handleDeletePost(post.postId); }}
-                                            onAddToCollection={() => { console.log('Add to collection'); }}
-                                        />
+                                    <li key={post.postId} className="post-item">
+                                        <h3>{post.title}</h3>
+                                        <p>{post.review}</p>
+                                        {renderStars(post.rating)}
+                                        <div className="button-container">
+                                            <button className="button-add" onClick={() => handleAddToCollection(post.postId)}>Add to Collection</button>
+                                            <button className="button-delete" onClick={() => handleDeletePost(post.postId)}>Delete</button>
+                                        </div>
                                     </li>
                                 ))}
                             </ul>
@@ -215,6 +239,11 @@ const Home: React.FC = () => {
                     </section>
                 </div>
             </div>
+            <CollectionModal
+                show={showModal}
+                onClose={handleCloseModal}
+                onAddToCollection={handleAddPostToCollection}
+            />
         </div>
     );
 };
