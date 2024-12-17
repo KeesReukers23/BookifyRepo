@@ -20,10 +20,10 @@ namespace bookifyWEBApi.Controllers
         }
 
         // GET: api/Collection/{id}
-        [HttpGet("{id}", Name = "GetCollectionById")]
-        public async Task<ActionResult<Collection>> GetCollectionByIdAsync(Guid id)
+        [HttpGet("{collectionId}", Name = "GetCollectionById")]
+        public async Task<ActionResult<Collection>> GetCollectionByIdAsync(Guid collectionId)
         {
-            Collection? collection = await _collectionService.GetCollectionByIdAsync(id);
+            Collection? collection = await _collectionService.GetCollectionByIdAsync(collectionId);
 
             if (collection == null)
             {
@@ -47,7 +47,7 @@ namespace bookifyWEBApi.Controllers
         }
 
         // GET: api/Collection/{id}/posts
-        [HttpGet("{id}/posts")]
+        [HttpGet("{collectionId}/posts")]
         public async Task<ActionResult<IEnumerable<Post>>> GetPostsByCollectionId(Guid CollectionId)
         {
             var posts = await _postService.GetPostsByCollectionIdAsync(CollectionId);
@@ -72,7 +72,7 @@ namespace bookifyWEBApi.Controllers
             Collection collection = await _collectionService.CreateCollectionAsync(collectionIm.Name, collectionIm.UserId);
 
             // Genereer de URL van de collectie
-            string? url = Url.RouteUrl("GetCollectionById", new { id = collection.CollectionId });
+            string? url = Url.RouteUrl("GetCollectionById", new { collectionId = collection.CollectionId });
 
             if (url == null)
             {
@@ -84,7 +84,7 @@ namespace bookifyWEBApi.Controllers
         }
 
         // POST api/Collection/AddPostToCollection
-        [HttpPost("AddPostToCollection")]
+        [HttpPost("collections/{collectionId}/posts")]
         public async Task<IActionResult> AddPostToCollection([FromBody] AddToCollectionIm request)
         {
             if (request == null)
@@ -107,10 +107,10 @@ namespace bookifyWEBApi.Controllers
 
 
         //DELETE: api/Collection/{id}
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCollectionAsync(Guid id)
+        [HttpDelete("{collectionId}")]
+        public async Task<IActionResult> DeleteCollectionAsync(Guid collectionId)
         {
-            bool success = await _collectionService.DeleteCollectionAsync(id);
+            bool success = await _collectionService.DeleteCollectionAsync(collectionId);
 
             if (!success)
             {
