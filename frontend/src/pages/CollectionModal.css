@@ -22,37 +22,53 @@
 
 .modal-content h2 {
     margin-top: 0;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
 }
 
 .modal-content ul {
     list-style-type: none;
     padding: 0;
+    margin: 20px 0;
 }
 
 .modal-content li {
     margin-bottom: 10px;
 }
 
-.modal-content button {
-    padding: 10px 20px;
+.modal-content .collection-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #007bff; /* Blauw voor de collectieknoppen */
     border: none;
     border-radius: 4px;
+    text-align: center;
     cursor: pointer;
-    text-align: left; /* Zorg ervoor dat de knoppen links zijn uitgelijnd */
-    width: 100%; /* Zorg ervoor dat de knoppen de volledige breedte van de lijstitems innemen */
+    transition: background-color 0.3s ease;
 }
 
-.modal-content button:hover {
+.modal-content .collection-button:hover {
     background-color: #0056b3;
 }
 
-.modal-content button:last-child {
-    background-color: #dc3545;
+.modal-content .close-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #dc3545; /* Rood voor de sluitknop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.modal-content button:last-child:hover {
+.modal-content .close-button:hover {
     background-color: #c82333;
 }

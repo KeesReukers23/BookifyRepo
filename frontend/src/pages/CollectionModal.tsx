@@ -55,7 +55,7 @@ const CollectionModal: React.FC<CollectionModalProps> = ({ show, onClose, onAddT
                     {collections.length > 0 ? (
                         collections.map((collection) => (
                             <li key={collection.collectionId}>
-                                <button onClick={() => onAddToCollection(collection.collectionId)}>
+                                <button className="collection-button" onClick={() => onAddToCollection(collection.collectionId)}>
                                     {collection.name}
                                 </button>
                             </li>
@@ -64,7 +64,7 @@ const CollectionModal: React.FC<CollectionModalProps> = ({ show, onClose, onAddT
                         <p>No collections available.</p>
                     )}
                 </ul>
-                <button onClick={onClose}>Close</button>
+                <button className="close-button" onClick={onClose}>Close</button>
             </div>
         </div>
     );
