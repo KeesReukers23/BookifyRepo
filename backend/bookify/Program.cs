@@ -1,3 +1,4 @@
+using bookifyWEBApi.SignalR;
 using DataAcces;
 using DataAccess.Repos;
 using Interfaces.IRepos;
@@ -63,15 +64,17 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 // Configure CORS to allow all origins, methods, and headers
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", policy =>
+    options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:3000")
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials();
     });
 });
 
@@ -88,11 +91,15 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 // Gebruik het CORS-beleid
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowSpecificOrigin");
 
 // Voeg authenticatiemiddleware toe vóór de authorizatiemiddleware
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<UserCountHub>("/userCountHub");
+app.UseWebSockets();
+
 app.Run();

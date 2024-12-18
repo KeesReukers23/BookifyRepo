@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import './CollectionPage.css';
 
 interface Collection {
     collectionId: string;
@@ -12,9 +13,7 @@ const CollectionPage = () => {
     const { collectionId } = useParams<{ collectionId: string }>(); 
     const [collection, setCollection] = useState<Collection | null>(null);
     const [posts, setPosts] = useState<any[]>([]);
-
     const token = localStorage.getItem('token'); // Haal het token uit de localStorage (of andere plaats waar je het opslaat)
-
 
     useEffect(() => {
         const fetchCollection = async () => {
@@ -34,7 +33,7 @@ const CollectionPage = () => {
                 const data = await response.json();
                 setCollection(data); 
             } catch (error) {
-                console.error("Er is een fout opgetreden bij het ophalen van de collectie:", error);
+                console.error(error);
             }
         };
 
@@ -53,33 +52,57 @@ const CollectionPage = () => {
                 }
 
                 const data = await response.json();
-                setPosts(data); // Stel de posts in
+                setPosts(data);
             } catch (error) {
-                console.error("Er is een fout opgetreden bij het ophalen van de posts:", error);
+                console.error(error);
             }
         };
 
-        // Roep de fetch-functies aan
         fetchCollection();
         fetchPosts();
     }, [collectionId, token]);
 
+    const renderStars = (rating: number) => {
+        return (
+            <div className="rating">
+                {[1, 2, 3, 4, 5].map((rate) => (
+                    <span key={rate} className={`star ${rate <= rating ? 'selected' : ''}`}>
+                        ★
+                    </span>
+                ))}
+            </div>
+        );
+    };
+
     return (
         <div>
             <Navbar />
-            <h1>Posts in Collection: {collection ? collection.name : 'Loading...'}</h1>
-            {posts.length === 0 ? (
-                <p>No posts available for this collection.</p>
-            ) : (
-                <ul>
-                    {posts.map((post) => (
-                        <li key={post.id}>
-                            <h3>{post.title}</h3>
-                            <p>{post.content}</p>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <div className="container">
+                <header>
+                    <h1>{collection ? collection.name : 'Loading...'}</h1>
+                </header>
+
+                <section className="posts-container">
+                    <h2>Posts in Collection</h2>
+                    {posts.length === 0 ? (
+                        <p>No posts available for this collection.</p>
+                    ) : (
+                        <ul>
+                            {posts.map((post) => (
+                                <li key={post.postId} className="post-item">
+                                    <h3>{post.title}</h3>
+                                    <p>{post.review}</p>
+                                    {renderStars(post.rating)}
+                                    <div className="button-container">
+                                        <button className="button-add">Add to Collection</button>
+                                        <button className="button-delete">Delete</button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+            </div>
         </div>
     );
 };
