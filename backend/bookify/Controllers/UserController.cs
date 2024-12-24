@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace bookifyWEBApi.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
 
@@ -19,6 +20,29 @@ namespace bookifyWEBApi.Controllers
             _jwtService = jwtService;
         }
 
+        // GET: api/user
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<UserEx>>> GetUsers()
+        {
+            try
+            {
+                var users = await _userService.GetAllUsersAsync();
+
+                var usersEx = users.Select(user => new UserEx()
+                {
+                    UserId = user.UserId,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email
+                });
+
+                return Ok(usersEx);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
 
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegistrationRequestIm registrationRequestIM)

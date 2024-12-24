@@ -67,12 +67,11 @@ builder.Services.AddSignalR();
 // Configure CORS to allow all origins, methods, and headers
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
+    options.AddPolicy("AllowAnyOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.AllowAnyOrigin()
               .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+              .AllowAnyHeader();
     });
 });
 
@@ -89,7 +88,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 // Gebruik het CORS-beleid
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowAnyOrigin");
 
 // Voeg authenticatiemiddleware toe vóór de authorizatiemiddleware
 app.UseAuthentication();

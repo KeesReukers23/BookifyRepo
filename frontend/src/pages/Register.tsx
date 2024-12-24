@@ -27,7 +27,7 @@ const SignUpForm: React.FC = () => {
     console.log('Submitting form...', { firstName, lastName, email, password });
 
     try {
-        const response = await axios.post('http://localhost:5169/register', {
+        const response = await axios.post('http://localhost:5169/api/User/register', {
             firstName,
             lastName,
             email,

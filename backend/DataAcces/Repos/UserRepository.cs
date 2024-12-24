@@ -38,6 +38,11 @@ namespace DataAccess.Repos
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
         public async Task<UserDto?> GetUserByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email == email);

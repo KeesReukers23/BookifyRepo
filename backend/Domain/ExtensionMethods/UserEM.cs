@@ -17,5 +17,11 @@ namespace Logic.ExtensionMethods
             };
             return dto;
         }
+
+        public static User toUser(this UserDto dto)
+        {
+            User user = new User(dto.UserId, dto.FirstName, dto.LastName, dto.Email);
+            return user;
+        }
     }
 }

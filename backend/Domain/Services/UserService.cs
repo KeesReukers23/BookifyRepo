@@ -16,6 +16,13 @@ namespace Logic.Services
             _jwtService = jwtService;
         }
 
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+
+            var users = await _userRepository.GetAllUsersAsync();
+            return users.Select(dto => dto.toUser());
+        }
+
         public async Task<User?> Login(string email, string password)
         {
             User? user = null;
