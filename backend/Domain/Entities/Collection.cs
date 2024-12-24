@@ -6,14 +6,14 @@
         public string Name { get; set; } = string.Empty;
         public Guid UserId { get; private set; }
 
-        public ICollection<PostCollection> PostCollections { get; set; }
+        public ICollection<Post> Posts { get; set; }
 
         public Collection(string name, Guid userId)
         {
             CollectionId = Guid.NewGuid();
             Name = name;
             UserId = userId;
-            PostCollections = new List<PostCollection>();
+            Posts = new List<Post>();
         }
 
         public Collection(Guid collectionId, string name, Guid userId)
@@ -21,7 +21,7 @@
             CollectionId = collectionId;
             Name = name;
             UserId = userId;
-            PostCollections = new List<PostCollection>();
+            Posts = new List<Post>();
         }
     }
 }

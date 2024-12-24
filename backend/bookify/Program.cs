@@ -21,13 +21,11 @@ builder.Services.AddDbContext<BookifyContext>(options =>
 // Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
-builder.Services.AddScoped<IPostCollectionRepository, PostCollectionRepository>();
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 
 // Register services
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PostService>();
-builder.Services.AddScoped<PostCollectionService>();
 builder.Services.AddScoped<CollectionService>();
 
 // Register JwtService

@@ -12,11 +12,15 @@ namespace Logic.ExtensionMethods
                 CollectionId = collection.CollectionId,
                 UserId = collection.UserId,
                 Name = collection.Name,
-                PostCollections = collection.PostCollections
-                    .Select(postCollection => new PostCollectionDto
+                Posts = collection.Posts
+                    .Select(post => new PostDto
                     {
-                        PostId = postCollection.PostId,
-                        CollectionId = postCollection.CollectionId
+                        PostId = post.PostId,
+                        Title = post.Title,
+                        Rating = post.Rating,
+                        Review = post.Review,
+                        UserId = post.UserId,
+                        CreatedAt = post.CreatedAt
                     })
                     .ToList()
             };
@@ -28,14 +32,14 @@ namespace Logic.ExtensionMethods
             var collection = new Collection(dto.CollectionId, dto.Name, dto.UserId);
 
             // Zet de PostCollections om van PostCollectionDto naar PostCollection
-            if (dto.PostCollections != null)
+            if (dto.Posts != null)
             {
-                foreach (var postCollectionDto in dto.PostCollections)
+                foreach (var postDto in dto.Posts)
                 {
-                    collection.PostCollections.Add(new PostCollection(postCollectionDto.PostId, postCollectionDto.CollectionId));
+                    Post post = new Post(postDto.PostId, postDto.CreatedAt, postDto.Rating, postDto.Review, postDto.UserId, postDto.Title);
+                    collection.Posts.Add(post);
                 }
             }
-
             return collection;
         }
     }

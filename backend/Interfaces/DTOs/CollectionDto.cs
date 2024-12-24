@@ -10,8 +10,8 @@ namespace Interfaces
 
         public Guid UserId { get; set; }
 
-        public UserDto user { get; set; } = null!;
+        public UserDto User { get; set; } = null!;
 
-        public ICollection<PostCollectionDto> PostCollections { get; set; } = new List<PostCollectionDto>();
+        public ICollection<PostDto> Posts { get; set; } = new List<PostDto>();
     }
 }

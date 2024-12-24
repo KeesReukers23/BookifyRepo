@@ -77,34 +77,26 @@ namespace DataAccess.Repos
 
         public async Task<IEnumerable<PostDto>> GetPostsByCollectionIdAsync(Guid collectionId)
         {
-            return await _context.PostCollections
-            .Where(pc => pc.CollectionId == collectionId)
-            .Select(pc => pc.Post)
-            .ToListAsync();
+            var posts = await _context.Collections
+                .Where(c => c.CollectionId == collectionId)
+                .SelectMany(c => c.Posts)
+                .ToListAsync();
+
+            return posts;
         }
 
         public async Task AddPostToCollectionAsync(Guid collectionId, Guid postId)
         {
-            var collection = await _context.Collections
-                .Include(c => c.PostCollections)
-                .FirstOrDefaultAsync(c => c.CollectionId == collectionId);
+            var collection = await _context.Collections.FindAsync(collectionId);
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(p => p.PostId == postId);
+            var post = await _context.Posts.FindAsync(postId);
 
             if (collection == null || post == null)
             {
                 throw new ArgumentException("Collection or Post not found.");
             }
 
-            var postCollection = new PostCollectionDto
-            {
-                CollectionId = collection.CollectionId,
-                PostId = post.PostId
-            };
-
-            collection.PostCollections.Add(postCollection);
-
+            collection.Posts.Add(post);
             await _context.SaveChangesAsync();
         }
 

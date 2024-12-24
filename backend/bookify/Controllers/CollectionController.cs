@@ -84,7 +84,7 @@ namespace bookifyWEBApi.Controllers
         }
 
         // POST api/Collection/AddPostToCollection
-        [HttpPost("collections/{collectionId}/posts")]
+        [HttpPost("{collectionId}/post")]
         public async Task<IActionResult> AddPostToCollection([FromBody] AddToCollectionIm request)
         {
             if (request == null)

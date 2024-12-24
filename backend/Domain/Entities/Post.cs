@@ -9,6 +9,8 @@
         public Guid UserId { get; private set; }
         public string Title { get; set; } = string.Empty;
 
+        public ICollection<Collection> Collections { get; set; }
+
         //Constructor for creating a new Post
         public Post(float rating, string review, Guid userId, string title)
         {
@@ -18,6 +20,7 @@
             this.Review = review;
             this.UserId = userId;
             this.Title = title;
+            this.Collections = new List<Collection>();
         }
 
         //Constructor for retrieving a Post
@@ -29,6 +32,7 @@
             this.Review = review;
             this.UserId = userId;
             this.Title = title;
+            this.Collections = new List<Collection>();
         }
     }
 }

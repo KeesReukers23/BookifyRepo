@@ -1,0 +1,267 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1400px; /* Totale breedte van de container */
+    margin: 0 auto; /* Centraal uitlijnen */
+    box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
+}
+
+header {
+    text-align: center; /* Centrerend tekst */
+}
+
+.flex-container {
+    display: flex; /* Flexbox voor zij-aan-zij positionering */
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 40px; /* Ruimte tussen de containers */
+}
+
+.new-post-container,
+.posts-container {
+    background: #f9f9f9; /* Lichte achtergrondkleur */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 700px; /* Stel een vaste hoogte in voor beide containers */
+    box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    flex: 1; /* Zorgt ervoor dat beide containers evenveel ruimte krijgen */
+    display: flex;
+    flex-direction: column;  /* Zodat de inhoud van de containers netjes boven elkaar wordt gepositioneerd */
+    justify-content: space-between;  /* Dit zorgt ervoor dat de inhoud netjes wordt verdeeld */
+}
+
+/* Verhoogde breedte voor posts-container */
+.posts-container {
+    width: 800px; /* Verhoog de breedte van de posts-container */
+    height: 700px; /* Stel dezelfde hoogte in als de new-post-container */
+    overflow-y: auto;  /* Maak de container scrollable */
+    padding-right: 10px; /* Optioneel: ruimte toevoegen aan de rechterkant */
+    margin-top: 0 !important; /* Verwijder de margin-top met !important */
+    padding: 60px; /* Verhoog de padding */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+}
+
+/* Specifieke breedte voor de nieuwe post container */
+.new-post-container {
+    width: 500px; /* Specifieke breedte voor de Create a new post container */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+    height: 700px; /* Stel dezelfde hoogte in als de posts-container */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
+}
+
+/* Zorg ervoor dat titels niet worden afgekapt */
+.new-post-container h2,
+.posts-container h1 {
+    text-align: center; /* Titels centreren */
+    font-size: 24px; /* Grotere tekstgrootte voor betere zichtbaarheid */
+    white-space: nowrap; /* Voorkomt dat de tekst naar de volgende regel gaat */
+    overflow: visible; /* Verbergt overtollige tekst niet */
+    text-overflow: ellipsis; /* Zet '...' als de tekst te lang is */
+}
+
+.new-post-container h2 {
+    margin-bottom: 20px; /* Voeg ruimte toe onder de titel */
+}
+
+.new-post-container .form-group input,
+.new-post-container .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.new-post-container .rating {
+    margin: 30px 0; /* Voeg meer marge toe boven en onder de sterren */
+}
+
+.new-post-container button {
+    padding: 15px; /* Verhoog de padding binnen de knop */
+    margin-top: 20px; /* Verhoog de marge boven de knop */
+}
+
+.new-post-container .form-group {
+    margin-bottom: 20px; /* Verhoog de marge tussen invoervelden */
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Voeg ruimte toe tussen de knoppen */
+    justify-content: center; /* Centreer de knoppen */
+}
+
+.button-add {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(40, 167, 69, 0.8); /* Groen met opacity voor de "Add to Collection" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-add:hover {
+    background-color: rgba(40, 167, 69, 1); /* Volledig groen bij hover */
+}
+
+.button-delete {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(220, 53, 69, 0.8); /* Rood met opacity voor de "Delete" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    background-color: rgba(220, 53, 69, 1); /* Volledig rood bij hover */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Ruimte tussen invoervelden */
+}
+.form-group input,
+.form-group textarea {
+    width: 100%; /* Volledige breedte van invoervelden */
+    padding: 10px; /* Padding binnen de invoervelden */
+    border: 1px solid #ddd; /* Rand van invoervelden */
+    border-radius: 4px; /* Hoekafgerond */
+}
+
+.form-group textarea {
+    resize: none; /* Voorkomt dat het tekstgebied kan worden vergroot of verkleind door de gebruiker */
+    min-height: 200px; /* Verhoog de minimale hoogte van het tekstgebied */
+}
+
+.rating {
+    display: flex; /* Zorg ervoor dat de sterren naast elkaar staan */
+    justify-content: center; /* Center de sterren horizontaal */
+    margin: 10px 0; /* Voeg wat marge toe boven en onder */
+}
+
+.star {
+    cursor: pointer; /* Maak de sterren klikbaar */
+    font-size: 24px; /* Pas de grootte van de sterren aan */
+    color: #ccc; /* Standaard kleur van de sterren */
+    transition: color 0.2s; /* Maak de kleurovergang soepel */
+}
+
+.star.selected {
+    color: gold; /* Kleur voor geselecteerde sterren */
+}
+
+button {
+    width: auto; /* Maak de breedte automatisch */
+    max-width: 200px; /* Maximale breedte van de knop */
+    padding: 10px; /* Padding binnen de knop */
+    margin-top: 10px; /* Ruimte boven de knop */
+    background-color: #007bff; /* Achtergrondkleur van de knop */
+    border: none; /* Geen rand */
+    border-radius: 4px; /* Hoekafgerond */
+    color: #fff; /* Witte tekstkleur */
+    font-size: 18px; /* Grotere tekstgrootte */
+    cursor: pointer; /* Handcursor voor interactie */
+    transition: background-color 0.3s; /* Voor een vloeiende overgang */
+    display: block; /* Zorgt ervoor dat de knop als een blok wordt weergegeven */
+    margin-left: auto; /* Centreert de knop horizontaal */
+    margin-right: auto; /* Centreert de knop horizontaal */
+}
+
+button:hover {
+    background-color: #0056b3; /* Donkerder blauw bij hover */
+}
+
+.posts-container ul {
+    list-style: none; /* Geen opsommingstekens */
+    padding: 0; /* Geen padding */
+}
+
+.posts-container li {
+    border: 1px solid #ddd; /* Lichte rand voor elk bericht */
+    border-radius: 5px; /* Hoekafgerond */
+    margin: 20px 0; /* Verhoog de ruimte tussen de berichten */
+    padding: 20px; /* Vergrote padding binnen het bericht */
+    background-color: #fff; /* Achtergrondkleur van de berichten */
+    transition: box-shadow 0.2s; /* Voegt een overgangseffect toe */
+}
+
+.posts-container li:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Schaduw bij hover */
+}
+
+.posts-container h2 {
+    margin: 0 0 5px; /* Marges voor titel */
+    font-size: 22px; /* Grotere tekstgrootte voor posttitels */
+    color: #333; /* Kleur voor posttitels */
+    text-align: center;
+}
+
+.posts-container p {
+    margin: 5px 0; /* Marges voor paragrafen */
+    color: #555; /* Kleur voor tekst */
+    line-height: 1.5; /* Verhoogde regelhoogte voor betere leesbaarheid */
+    overflow-wrap: break-word; /* Zorgt ervoor dat lange woorden worden afgebroken */
+    text-align: center;
+}
+
+.posts-container small {
+    color: #888; /* Kleur voor datum en andere kleine teksten */
+}
+
+/* Styling voor subtiele actieknoppen */
+.action-button {
+    background: none;
+    border: none;
+    color: #007bff; /* Subtiele blauwe kleur */
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.action-button:hover {
+    color: #0056b3; /* Donkerdere kleur bij hover */
+}
+
+.action-buttons-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.error {
+    color: red; /* Rood voor de foutmelding */
+    opacity: 60;
+    font-weight: bold; /* Maak de tekst vet */
+    text-align: center; /* Centreer de tekst */
+    margin: 10px 0; /* Ruimte boven en onder de foutmelding */
+    padding: 10px; /* Voeg wat padding toe voor visuele ruimte */
+}
+
+.post-item {
+    text-align: center; /* Centreer de inhoud binnen een post */
+}
+
+/* Media Queries Voor Responsiviteit */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column; /* Stapelen op kleinere schermen */
+        gap: 20px; /* Verminderde ruimte tussen de containers */
+    }
+
+    .new-post-container,
+    .posts-container {
+        width: 100%; /* Containers nemen volledige breedte in op kleine schermen */
+    }
+}
