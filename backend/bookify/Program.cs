@@ -94,9 +94,21 @@ app.UseCors("AllowAnyOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapControllers();
+
+// Configureer het gebruik van statische bestanden
+app.UseDefaultFiles(); // Zorgt ervoor dat index.html standaard wordt geserveerd
+app.UseStaticFiles();  // Bedient statische bestanden uit de wwwroot-map
+
+// Voeg fallback-middleware toe om onbekende routes naar index.html te leiden
+app.MapFallbackToFile("index.html"); // Zorg ervoor dat index.html in de wwwroot-map staat
+
+
 
 app.MapHub<UserCountHub>("/userCountHub");
 app.UseWebSockets();
+
+app.MapGet("/", () => "huts");
 
 app.Run();

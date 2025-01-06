@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Home.css';
 import Navbar from './Navbar';
 import CollectionModal from './CollectionModal';
+import apiUrl from '../config/config';
+import axios from 'axios';
 
 const Home = () => {
     const [firstName, setFirstName] = useState<string | null>(null);
@@ -34,24 +36,18 @@ const Home = () => {
             console.error("User is not authenticated");
             return;
         }
-
+    
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5169/api/Post/User/${userId}`, {
-                method: 'GET',
+            const response = await axios.get(`${apiUrl}/api/Post/User/${userId}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts');
-            }
-
-            const data = await response.json();
-            setPosts(data);
+    
+            setPosts(response.data); // axios plaatst de response data standaard onder 'data'
         } catch (error) {
-            console.error(error);
+            console.error('Failed to fetch posts', error);
         } finally {
             setLoading(false);
         }
@@ -77,7 +73,7 @@ const Home = () => {
         if (!selectedPostId || !token) return;
 
         try {
-            const response = await fetch(`http://localhost:5169/api/Collection/${collectionId}/post`, {
+            const response = await fetch(`${apiUrl}/api/Collection/${collectionId}/post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +112,7 @@ const Home = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:5169/api/Post', {
+            const response = await fetch(`${apiUrl}/api/Post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -146,7 +142,7 @@ const Home = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5169/api/Post/${postId}`, {
+            const response = await fetch(`${apiUrl}/api/Post/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

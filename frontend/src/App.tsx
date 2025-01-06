@@ -10,7 +10,7 @@ import CollectionPage from './pages/CollectionPage';
 
 const App: React.FC = () => {
     return (
-        <Router>
+        <Router >
             <Routes>
                 <Route path="/" element={<Navigate to="/login" replace />} />
                 <Route path="/home" element={<Home />} />

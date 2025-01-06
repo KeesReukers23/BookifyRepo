@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UsersPage.css'; // Importeer de CSS
+import apiUrl from '../config/config';
 
 // Definieer het type voor een gebruiker
 interface User {
@@ -20,7 +21,7 @@ const UsersPage: React.FC = () => {
     const fetchUsers = async () => {
       try {
         // Gebruik een API-aanroep om de gebruikers op te halen
-        const response = await axios.get('http://localhost:5169/api/User');
+        const response = await axios.get(`${apiUrl}/api/User`);
         setUsers(response.data);
         setLoading(false);
       } catch (err) {

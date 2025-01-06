@@ -39,5 +39,12 @@
 .navbar-item:hover {
     color: #ddd;
     background-color: #575757;
-    height: 100%; /* Zorg ervoor dat de hover niet buiten de navbar gaat */
+}
+
+.navbar-text {
+    margin: 0 30px; /* Voeg meer ruimte toe tussen de items */
+    color: white;
+    display: flex;
+    align-items: center; /* Zorg ervoor dat de items verticaal gecentreerd zijn */
+    height: 100%; /* Zorg ervoor dat de items de volledige hoogte van de navbar hebben */
 }
