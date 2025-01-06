@@ -1,6 +1,6 @@
 ﻿using DataAcces;
+using Interfaces;
 using Interfaces.IRepos;
-using Interfaces.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repos
@@ -36,6 +36,11 @@ namespace DataAccess.Repos
         public Task DeleteUserAsync(Guid userId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        {
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<UserDto?> GetUserByEmail(string email)

@@ -1,0 +1,74 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 100%;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+}
+
+.modal-content .collection-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Blauw voor de collectieknoppen */
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .collection-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-content .close-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #dc3545; /* Rood voor de sluitknop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.modal-content .close-button:hover {
+    background-color: #c82333;
+}

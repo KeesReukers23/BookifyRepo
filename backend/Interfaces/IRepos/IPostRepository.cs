@@ -1,6 +1,4 @@
-﻿using Interfaces.Models;
-
-namespace Interfaces.IRepos
+﻿namespace Interfaces.IRepos
 {
     public interface IPostRepository
     {
@@ -9,9 +7,12 @@ namespace Interfaces.IRepos
 
         Task<PostDto?> GetPostByIdAsync(Guid postId);
         Task<IEnumerable<PostDto>> GetAllPostsFromUserAsync(Guid UserId);
+        Task<IEnumerable<PostDto>> GetPostsByCollectionIdAsync(Guid collectionId);
 
         Task<bool> UpdatePostAsync(PostDto dto);
 
         Task<bool> DeletePostAsync(Guid postId);
+
+        Task AddPostToCollectionAsync(Guid postId, Guid collectionId);
     }
 }

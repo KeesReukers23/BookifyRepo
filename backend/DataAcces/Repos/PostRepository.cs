@@ -1,6 +1,6 @@
 ﻿using DataAcces;
+using Interfaces;
 using Interfaces.IRepos;
-using Interfaces.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repos
@@ -74,5 +74,32 @@ namespace DataAccess.Repos
 
             return true;
         }
+
+        public async Task<IEnumerable<PostDto>> GetPostsByCollectionIdAsync(Guid collectionId)
+        {
+            var posts = await _context.Collections
+                .Where(c => c.CollectionId == collectionId)
+                .SelectMany(c => c.Posts)
+                .ToListAsync();
+
+            return posts;
+        }
+
+        public async Task AddPostToCollectionAsync(Guid collectionId, Guid postId)
+        {
+            var collection = await _context.Collections.FindAsync(collectionId);
+
+            var post = await _context.Posts.FindAsync(postId);
+
+            if (collection == null || post == null)
+            {
+                throw new ArgumentException("Collection or Post not found.");
+            }
+
+            collection.Posts.Add(post);
+            await _context.SaveChangesAsync();
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importing CSS for styling
 import axios from 'axios';
+import apiUrl from '../config/config';
 
 const SignUpForm: React.FC = () => {
   const [firstName, setFirstName] = useState<string>('');
@@ -11,6 +12,7 @@ const SignUpForm: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState<string>('');
   const navigate = useNavigate();
+ 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ const SignUpForm: React.FC = () => {
     console.log('Submitting form...', { firstName, lastName, email, password });
 
     try {
-        const response = await axios.post('http://localhost:5169/register', {
+        const response = await axios.post(`${apiUrl}/api/User/register`, {
             firstName,
             lastName,
             email,

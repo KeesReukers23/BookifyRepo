@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Interfaces.Models
+namespace Interfaces
 {
     public class CommentDto
     {

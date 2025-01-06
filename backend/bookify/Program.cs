@@ -1,3 +1,4 @@
+using bookifyWEBApi.SignalR;
 using DataAcces;
 using DataAccess.Repos;
 using Interfaces.IRepos;
@@ -20,10 +21,12 @@ builder.Services.AddDbContext<BookifyContext>(options =>
 // Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 
 // Register services
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<CollectionService>();
 
 // Register JwtService
 builder.Services.AddScoped<JwtService>(provider =>
@@ -59,11 +62,12 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 // Configure CORS to allow all origins, methods, and headers
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", policy =>
+    options.AddPolicy("AllowAnyOrigin", policy =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
@@ -84,11 +88,27 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 // Gebruik het CORS-beleid
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowAnyOrigin");
 
 // Voeg authenticatiemiddleware toe vóór de authorizatiemiddleware
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.MapControllers();
+
+// Configureer het gebruik van statische bestanden
+app.UseDefaultFiles(); // Zorgt ervoor dat index.html standaard wordt geserveerd
+app.UseStaticFiles();  // Bedient statische bestanden uit de wwwroot-map
+
+// Voeg fallback-middleware toe om onbekende routes naar index.html te leiden
+app.MapFallbackToFile("index.html"); // Zorg ervoor dat index.html in de wwwroot-map staat
+
+
+
+app.MapHub<UserCountHub>("/userCountHub");
+app.UseWebSockets();
+
+app.MapGet("/", () => "huts");
+
 app.Run();

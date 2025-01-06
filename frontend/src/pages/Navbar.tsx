@@ -1,20 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import './Navbar.css';
+import UserCountComponent from '../components/UserCountComponent';
 
-const Navbar: React.FC = () => {
-  return (
-    <nav className="navbar">
-      <ul className="navbar-list">
-        <li className="navbar-item">
-          <Link to="/your-posts">Your Posts</Link>
-        </li>
-        <li className="navbar-item">
-          <Link to="/friends">Friends</Link>
-        </li>
-      </ul>
-    </nav>
-  );
+const Navbar = () => {
+    return (
+        <nav className="navbar">
+            <ul className="navbar-list">
+                <li><a href="/home" className="navbar-item">Home</a></li>
+                <li><a href="/collections" className="navbar-item">Collections</a></li>
+                <li className="navbar-text"><UserCountComponent /></li>
+            </ul>
+        </nav>
+    );
 };
 
 export default Navbar;

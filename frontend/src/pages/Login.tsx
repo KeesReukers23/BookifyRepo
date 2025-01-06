@@ -16,21 +16,18 @@ const Login: React.FC = () => {
     // Basic validation
     if (!email || !password) {
       setError('Please fill in all fields.');
-      console.log('Validation failed: ', { email, password });
       return;
     }
   
     setError('');
     setSuccess('');
-    console.log('Submitting form...', { email, password });
   
     try {
       // Controleer of de juiste URL wordt gebruikt
-      const response = await axios.post('http://localhost:5169/login', {
+      const response = await axios.post('http://localhost:5169/api/User/login', {
         email,
         password,
       });
-      console.log('Response received from backend:', response.data);
   
       // Als de login succesvol is
       localStorage.setItem('token', response.data.token); // Sla het token op in localStorage

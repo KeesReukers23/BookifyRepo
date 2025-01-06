@@ -1,5 +1,5 @@
-﻿using Interfaces.IRepos;
-using Interfaces.Models;
+﻿using Interfaces;
+using Interfaces.IRepos;
 using Logic.Entities;
 using Logic.ExtensionMethods;
 
@@ -13,6 +13,24 @@ namespace Logic.Services
         public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
+        }
+
+
+        public async Task<IEnumerable<Post>> GetPostsByCollectionIdAsync(Guid collectionId)
+        {
+            IEnumerable<PostDto> postDtos = await _postRepository.GetPostsByCollectionIdAsync(collectionId);
+            if (postDtos == null)
+            {
+                return Enumerable.Empty<Post>();
+            }
+
+            IEnumerable<Post> posts = postDtos.Select(dto => dto.ToPost());
+            return posts;
+        }
+
+        public async Task AddPostToCollectionAsync(Guid postId, Guid collectionId)
+        {
+            await _postRepository.AddPostToCollectionAsync(postId, collectionId);
         }
 
         public async Task<Guid?> AddPost(Post post)
@@ -57,6 +75,8 @@ namespace Logic.Services
             var posts = postDtos.Select(dto => dto.ToPost());
             return posts;
         }
+
+
 
     }
 }

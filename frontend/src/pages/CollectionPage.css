@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1400px; /* Totale breedte van de container */
+    margin: 0 auto; /* Centraal uitlijnen */
+    box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
+}
+
+header {
+    text-align: center; /* Centrerend tekst */
+}
+
+.posts-container {
+    background: #f9f9f9; /* Lichte achtergrondkleur */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 700px; /* Stel een vaste hoogte in voor de container */
+    box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    overflow-y: auto;  /* Maak de container scrollable */
+    padding-right: 10px; /* Optioneel: ruimte toevoegen aan de rechterkant */
+    margin-top: 0 !important; /* Verwijder de margin-top met !important */
+    padding: 60px; /* Verhoog de padding */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+}
+
+.post-item {
+    text-align: center; /* Centreer de inhoud binnen een post */
+    margin-bottom: 20px; /* Voeg ruimte toe tussen de posts */
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star.selected {
+    color: #ffcc00;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Voeg ruimte toe tussen de knoppen */
+    justify-content: center; /* Centreer de knoppen */
+}
+
+.button-add {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(40, 167, 69, 0.8); /* Groen met opacity voor de "Add to Collection" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-add:hover {
+    background-color: rgba(40, 167, 69, 1); /* Volledig groen bij hover */
+}
+
+.button-delete {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(220, 53, 69, 0.8); /* Rood met opacity voor de "Delete" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    background-color: rgba(220, 53, 69, 1); /* Volledig rood bij hover */
+}

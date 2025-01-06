@@ -34,7 +34,7 @@ namespace Logic.Services
                 issuer: _issuer,
                 audience: _audience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

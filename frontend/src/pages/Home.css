@@ -1,45 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     max-width: 1400px; /* Totale breedte van de container */
     margin: 0 auto; /* Centraal uitlijnen */
     box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
 }
 
 header {
     text-align: center; /* Centrerend tekst */
-    margin-bottom: 20px; /* Ruimte onder de header */
 }
 
 .flex-container {
     display: flex; /* Flexbox voor zij-aan-zij positionering */
-    justify-content: center; /* Centreren van de containers */
+    justify-content: space-between;
+    align-items: stretch;
     gap: 40px; /* Ruimte tussen de containers */
-    flex-wrap: wrap; /* Zodat containers niet afgekapt worden */
 }
 
 .new-post-container,
-.friends-container,
 .posts-container {
     background: #f9f9f9; /* Lichte achtergrondkleur */
-    padding: 40px; /* Padding voor meer ruimte */
-    border-radius: 8px; /* Hoekafgeronde containers */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Zachte schaduw */
-    width: 400px; /* Vaste breedte voor containers */
-    min-height: 500px; /* Minimum hoogte om groter te maken */
-    overflow: hidden; /* Zorgt ervoor dat inhoud die te groot is niet zichtbaar is */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 700px; /* Stel een vaste hoogte in voor beide containers */
     box-sizing: border-box; /* Voorkomt dat de rand de breedte van het element vergroot */
+    flex: 1; /* Zorgt ervoor dat beide containers evenveel ruimte krijgen */
+    display: flex;
+    flex-direction: column;  /* Zodat de inhoud van de containers netjes boven elkaar wordt gepositioneerd */
+    justify-content: space-between;  /* Dit zorgt ervoor dat de inhoud netjes wordt verdeeld */
 }
 
+/* Verhoogde breedte voor posts-container */
+.posts-container {
+    width: 800px; /* Verhoog de breedte van de posts-container */
+    height: 700px; /* Stel dezelfde hoogte in als de new-post-container */
+    overflow-y: auto;  /* Maak de container scrollable */
+    padding-right: 10px; /* Optioneel: ruimte toevoegen aan de rechterkant */
+    margin-top: 0 !important; /* Verwijder de margin-top met !important */
+    padding: 60px; /* Verhoog de padding */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+}
 
+/* Specifieke breedte voor de nieuwe post container */
+.new-post-container {
+    width: 500px; /* Specifieke breedte voor de Create a new post container */
+    justify-content: flex-start; /* Zorg ervoor dat de inhoud bovenin blijft */
+    height: 700px; /* Stel dezelfde hoogte in als de posts-container */
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
+}
 
 /* Zorg ervoor dat titels niet worden afgekapt */
 .new-post-container h2,
-.posts-container h1,
-.friends-container h1 {
+.posts-container h1 {
     text-align: center; /* Titels centreren */
     font-size: 24px; /* Grotere tekstgrootte voor betere zichtbaarheid */
     white-space: nowrap; /* Voorkomt dat de tekst naar de volgende regel gaat */
     overflow: visible; /* Verbergt overtollige tekst niet */
     text-overflow: ellipsis; /* Zet '...' als de tekst te lang is */
+}
+
+.new-post-container h2 {
+    margin-bottom: 20px; /* Voeg ruimte toe onder de titel */
+}
+
+.new-post-container .form-group input,
+.new-post-container .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.new-post-container .rating {
+    margin: 30px 0; /* Voeg meer marge toe boven en onder de sterren */
+}
+
+.new-post-container button {
+    padding: 15px; /* Verhoog de padding binnen de knop */
+    margin-top: 20px; /* Verhoog de marge boven de knop */
+}
+
+.new-post-container .form-group {
+    margin-bottom: 20px; /* Verhoog de marge tussen invoervelden */
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Voeg ruimte toe tussen de knoppen */
+    justify-content: center; /* Centreer de knoppen */
+}
+
+.button-add {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(40, 167, 69, 0.8); /* Groen met opacity voor de "Add to Collection" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-add:hover {
+    background-color: rgba(40, 167, 69, 1); /* Volledig groen bij hover */
+}
+
+.button-delete {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(220, 53, 69, 0.8); /* Rood met opacity voor de "Delete" knop */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    background-color: rgba(220, 53, 69, 1); /* Volledig rood bij hover */
 }
 
 .form-group {
@@ -55,7 +139,7 @@ header {
 
 .form-group textarea {
     resize: none; /* Voorkomt dat het tekstgebied kan worden vergroot of verkleind door de gebruiker */
-    min-height: 100px; /* Minimale hoogte voor het tekstgebied */
+    min-height: 200px; /* Verhoog de minimale hoogte van het tekstgebied */
 }
 
 .rating {
@@ -104,7 +188,7 @@ button:hover {
 .posts-container li {
     border: 1px solid #ddd; /* Lichte rand voor elk bericht */
     border-radius: 5px; /* Hoekafgerond */
-    margin: 10px 0; /* Ruimte tussen de berichten */
+    margin: 20px 0; /* Verhoog de ruimte tussen de berichten */
     padding: 20px; /* Vergrote padding binnen het bericht */
     background-color: #fff; /* Achtergrondkleur van de berichten */
     transition: box-shadow 0.2s; /* Voegt een overgangseffect toe */
@@ -118,6 +202,7 @@ button:hover {
     margin: 0 0 5px; /* Marges voor titel */
     font-size: 22px; /* Grotere tekstgrootte voor posttitels */
     color: #333; /* Kleur voor posttitels */
+    text-align: center;
 }
 
 .posts-container p {
@@ -125,6 +210,7 @@ button:hover {
     color: #555; /* Kleur voor tekst */
     line-height: 1.5; /* Verhoogde regelhoogte voor betere leesbaarheid */
     overflow-wrap: break-word; /* Zorgt ervoor dat lange woorden worden afgebroken */
+    text-align: center;
 }
 
 .posts-container small {
@@ -138,7 +224,7 @@ button:hover {
     color: #007bff; /* Subtiele blauwe kleur */
     cursor: pointer;
     font-size: 0.9rem;
-    margin: 0 5px;
+    margin: 0;
     padding: 0;
     text-decoration: underline;
 }
@@ -154,6 +240,18 @@ button:hover {
     justify-content: flex-end;
 }
 
+.error {
+    color: red; /* Rood voor de foutmelding */
+    opacity: 60;
+    font-weight: bold; /* Maak de tekst vet */
+    text-align: center; /* Centreer de tekst */
+    margin: 10px 0; /* Ruimte boven en onder de foutmelding */
+    padding: 10px; /* Voeg wat padding toe voor visuele ruimte */
+}
+
+.post-item {
+    text-align: center; /* Centreer de inhoud binnen een post */
+}
 
 /* Media Queries Voor Responsiviteit */
 @media (max-width: 768px) {
@@ -161,10 +259,9 @@ button:hover {
         flex-direction: column; /* Stapelen op kleinere schermen */
         gap: 20px; /* Verminderde ruimte tussen de containers */
     }
-    
+
     .new-post-container,
-    .posts-container,
-    .friends-container {
+    .posts-container {
         width: 100%; /* Containers nemen volledige breedte in op kleine schermen */
     }
 }

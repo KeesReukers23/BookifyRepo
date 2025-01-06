@@ -1,4 +1,4 @@
-﻿using Interfaces.Models;
+﻿using Interfaces;
 using Logic.Entities;
 
 namespace Logic.ExtensionMethods

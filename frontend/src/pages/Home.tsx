@@ -1,16 +1,22 @@
-import React, { useEffect, useState, useCallback } from 'react';
-
+import React, { useState, useEffect, useCallback } from 'react';
 import './Home.css';
+import Navbar from './Navbar';
+import CollectionModal from './CollectionModal';
+import apiUrl from '../config/config';
+import axios from 'axios';
 
-const Home: React.FC = () => {
-    const [posts, setPosts] = useState<any[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+const Home = () => {
     const [firstName, setFirstName] = useState<string | null>(null);
+    const [userId, setUserId] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [posts, setPosts] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
     const [title, setTitle] = useState<string>('');
     const [review, setReview] = useState<string>('');
     const [rating, setRating] = useState<number>(0);
-    const [userId, setUserId] = useState<string | null>(null);
-    const [token, setToken] = useState<string | null>(null);
+    const [formError, setFormError] = useState<string>('');
 
     useEffect(() => {
         const userData = localStorage.getItem('user');
@@ -18,7 +24,7 @@ const Home: React.FC = () => {
         if (userData) {
             const user = JSON.parse(userData);
             setFirstName(user.firstName);
-            setUserId(user.userId);  
+            setUserId(user.userId);
         }
         if (storedToken) {
             setToken(storedToken);
@@ -30,32 +36,70 @@ const Home: React.FC = () => {
             console.error("User is not authenticated");
             return;
         }
-
+    
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5169/api/Post/User/${userId}`, {
-                method: 'GET',
+            const response = await axios.get(`${apiUrl}/api/Post/User/${userId}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                },
             });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts');
-            }
-
-            const data = await response.json();
-            setPosts(data);
+    
+            setPosts(response.data); // axios plaatst de response data standaard onder 'data'
         } catch (error) {
-            console.error(error);
+            console.error('Failed to fetch posts', error);
         } finally {
             setLoading(false);
         }
-    },[token, userId]);
+    }, [token, userId]);
 
     useEffect(() => {
-        fetchUserPosts();
+        if (token && userId) {
+            fetchUserPosts();
+        }
     }, [token, userId, fetchUserPosts]);
+    
+    const handleAddToCollection = (postId: string) => {
+        setSelectedPostId(postId);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {   
+        setShowModal(false);
+        setSelectedPostId(null);
+    };
+
+    const handleAddPostToCollection = async (collectionId: string) => {
+        if (!selectedPostId || !token) return;
+
+        try {
+            const response = await fetch(`${apiUrl}/api/Collection/${collectionId}/post`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ collectionId, postId: selectedPostId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add post to collection');
+            }
+
+            handleCloseModal();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const validateForm = () => {
+        if (title === '' || review === '' || rating === 0) {
+            setFormError('Please fill in all fields');
+            return false;
+        }
+        setFormError('');
+        return true;
+    };
 
     const handleCreatePost = async () => {
         if (!token || !userId) {
@@ -63,24 +107,29 @@ const Home: React.FC = () => {
             return;
         }
 
+        if (!validateForm()) {
+            return;
+        }
+
         try {
-            const response = await fetch(`http://localhost:5169/api/Post`, {
+            const response = await fetch(`${apiUrl}/api/Post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ title, review, rating, userId })
+                body: JSON.stringify({ title, review, rating, userId }),
             });
 
             if (!response.ok) {
                 throw new Error('Failed to create post');
             }
 
+            const newPost = await response.json();
+            setPosts([...posts, newPost]);
             setTitle('');
             setReview('');
             setRating(0);
-            fetchUserPosts();
         } catch (error) {
             console.error(error);
         }
@@ -93,7 +142,7 @@ const Home: React.FC = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5169/api/Post/${postId}`, {
+            const response = await fetch(`${apiUrl}/api/Post/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -104,86 +153,93 @@ const Home: React.FC = () => {
                 throw new Error('Failed to delete post');
             }
 
-            setPosts(posts.filter(post => post.id !== Number(postId)));
+            setPosts(posts.filter(post => post.postId !== postId));
         } catch (error) {
             console.error(error);
         }
     };
 
-    const handleRating = (rate: number) => {
-        setRating(rate);
-    };
-
-    return (
-        <div className="container">
-            <header>
-                <h1>Welcome{firstName ? `, ${firstName}` : ""}!</h1>
-            </header>
-
-            <div className="flex-container">
-                <section className="new-post-container">
-                    <h2>Create a New Post</h2>
-                    <div className="form-group">
-                        <input 
-                            type="text" 
-                            placeholder="Book Title" 
-                            value={title} 
-                            onChange={(e) => setTitle(e.target.value)} 
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <textarea 
-                            placeholder="What did you think of the book?" 
-                            value={review} 
-                            onChange={(e) => setReview(e.target.value)} 
-                            required
-                        />
-                    </div>
-                    <div className="form-group rating">
-                        {[1, 2, 3, 4, 5].map((rate) => (
-                            <span 
-                                key={rate} 
-                                className={`star ${rate <= rating ? 'selected' : ''}`} 
-                                onClick={() => handleRating(rate)}
-                            >
-                                ★
-                            </span>
-                        ))}
-                    </div>
-                    <button onClick={handleCreatePost}>Submit</button>
-                </section>
-
-                <section className="posts-container">
-                    <h1>Your Posts</h1>
-                    {loading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <ul>
-                            {posts.map((post) => (
-                                <li key={post.id}>
-                                    <h2>{post.title}</h2>
-                                    <p>{post.review}</p>
-                                    <small>Rating: {post.rating}</small>
-                                    <button
-                                        className="delete-link"
-                                        onClick={() => handleDeletePost(post.id.toString())}
-                                        aria-label="Delete post"
-                                    >
-                                        Delete
-                                    </button>
-
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </section>
-
-                <section className="friends-container">
-                    <h1>Your Friends</h1>
-                    <p>List of friends will be displayed here.</p>
-                </section>
+    const renderStars = (rating: number) => {
+        return (
+            <div className="rating">
+                {[1, 2, 3, 4, 5].map((rate) => (
+                    <span key={rate} className={`star ${rate <= rating ? 'selected' : ''}`}>
+                        ★
+                    </span>
+                ))}
             </div>
+        );
+    };
+    
+    return (
+        <div>
+            <Navbar />
+            <div className="container">
+                <header>
+                    <h1>Welcome{firstName ? `, ${firstName}` : ""}!</h1>
+                </header>
+
+                <div className="flex-container">
+                    <section className="new-post-container">
+                        <h2>Create a New Post</h2>
+                        {/* Form for creating a new post */}
+                        <div className="form-group">
+                            <input
+                                type="text"
+                                placeholder="Title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <textarea
+                                placeholder="Review"
+                                value={review}
+                                onChange={(e) => setReview(e.target.value)}
+                            />
+                        </div>
+                        {formError && <p className="error">{formError}</p>}
+                        <div className="form-group rating">
+                            {[1, 2, 3, 4, 5].map((rate) => (
+                                <span
+                                    key={rate}
+                                    className={`star ${rate <= rating ? 'selected' : ''}`}
+                                    onClick={() => setRating(rate)}
+                                >
+                                    ★
+                                </span>
+                            ))}
+                        </div>
+                        <button onClick={handleCreatePost}>Submit</button>
+                    </section>
+
+                    <section className="posts-container">
+                        <h2>Your Posts</h2>
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            <ul>
+                                {posts.map((post) => (
+                                    <li key={post.postId} className="post-item">
+                                        <h3>{post.title}</h3>
+                                        <p>{post.review}</p>
+                                        {renderStars(post.rating)}
+                                        <div className="button-container">
+                                            <button className="button-add" onClick={() => handleAddToCollection(post.postId)}>Add to Collection</button>
+                                            <button className="button-delete" onClick={() => handleDeletePost(post.postId)}>Delete</button>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </section>
+                </div>
+            </div>
+            <CollectionModal
+                show={showModal}
+                onClose={handleCloseModal}
+                onAddToCollection={handleAddPostToCollection}
+            />
         </div>
     );
 };

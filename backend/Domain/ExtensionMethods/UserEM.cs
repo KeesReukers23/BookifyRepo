@@ -1,4 +1,4 @@
-﻿using Interfaces.Models;
+﻿using Interfaces;
 using Logic.Entities;
 
 namespace Logic.ExtensionMethods
@@ -16,6 +16,12 @@ namespace Logic.ExtensionMethods
                 Password = user.Password,
             };
             return dto;
+        }
+
+        public static User toUser(this UserDto dto)
+        {
+            User user = new User(dto.UserId, dto.FirstName, dto.LastName, dto.Email);
+            return user;
         }
     }
 }

@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Maak de container breder */
+    margin: 0 auto;
+    padding-top: 20px; /* Voeg wat ruimte toe aan de bovenkant */
+}
+
+.create-collection-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Zorg dat de form de volledige breedte van de container gebruikt */
+    max-width: 400px; /* Optionele maximale breedte */
+}
+
+.create-collection-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%; /* Zorg dat het de volledige breedte van de form gebruikt */
+}
+
+.create-collection-form button {
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Zorg dat de knop de volledige breedte van de form gebruikt */
+}
+
+.create-collection-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.collections-container {
+    width: 100%;
+    max-width: 1200px; /* Maak de container breder */
+    margin: 10px 0; /* Verklein de marge om de container meer naar boven te plaatsen */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centreer de inhoud horizontaal */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.collections-table-container {
+    width: 100%;
+    max-width: 1200px; /* Maak de container breder */
+    margin: 20px auto; /* Voeg wat ruimte toe aan de bovenkant */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.collections-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.collections-table th,
+.collections-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.collections-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.collections-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.collections-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.collections-table .actions {
+    display: flex;
+    gap: 10px; /* Voeg ruimte toe tussen de knoppen */
+}
+
+.collections-table button {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.collections-table button:hover {
+    background-color: #0056b3;
+}
+
+.collections-table button:last-child {
+    background-color: #dc3545;
+}
+
+.collections-table button:last-child:hover {
+    background-color: #c82333;
+}
+
+/* Specifieke breedtes voor de kolommen */
+.collections-table th:first-child,
+.collections-table td:first-child {
+    width: 80%; /* Maak de kolom "Name" veel breder */
+}
+
+.collections-table th:last-child,
+.collections-table td:last-child {
+    width: 150px; /* Zorg ervoor dat de kolom "Actions" breed genoeg is voor de knoppen */
+}

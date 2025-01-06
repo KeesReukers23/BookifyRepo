@@ -1,31 +1,50 @@
 .navbar {
+    width: 100%;
+    height: 60px; /* Stel een vaste hoogte in voor de navbar */
     background-color: #333;
-    padding: 10px 20px;
-    position: fixed; /* Zorgt ervoor dat de navbar vast bovenaan blijft */
-    top: 0;  /* Plaatst de navbar bovenaan */
-    left: 0;  /* Zorgt ervoor dat het aan de linkerkant begint */
-    width: 100%;  /* Maakt de navbar even breed als de pagina */
-    z-index: 1000;  /* Zorgt ervoor dat de navbar altijd boven andere elementen komt */
-  }
-  
-  .navbar-list {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centreer de items horizontaal */
+    padding: 0 20px; /* Voeg padding toe aan de zijkanten */
+    box-sizing: border-box; /* Zorg ervoor dat padding wordt meegerekend in de breedte */
+    position: fixed; /* Maak de navbar vast aan de bovenkant van de pagina */
+    top: 0; /* Plaats de navbar aan de bovenkant */
+    left: 0; /* Zorg ervoor dat de navbar de volledige breedte van de pagina inneemt */
+    right: 0; /* Zorg ervoor dat de navbar de volledige breedte van de pagina inneemt */
+    z-index: 1000; /* Zorg ervoor dat de navbar boven andere elementen wordt weergegeven */
+}
+
+.navbar-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-around;
-  }
-  
-  .navbar-item {
-    padding: 10px;
-  }
-  
-  .navbar-item a {
+    justify-content: center; /* Centreer de items in de lijst */
+    width: 100%;
+    height: 100%; /* Zorg ervoor dat de lijst de volledige hoogte van de navbar inneemt */
+    align-items: center; /* Centreer de items verticaal */
+}
+
+.navbar-item {
+    margin: 0 30px; /* Voeg meer ruimte toe tussen de items */
     color: white;
     text-decoration: none;
-  }
-  
-  .navbar-item a:hover {
-    color: #f1f1f1;
-  }
-  
+    padding: 10px;
+    display: flex;
+    align-items: center; /* Zorg ervoor dat de items verticaal gecentreerd zijn */
+    height: 100%; /* Zorg ervoor dat de items de volledige hoogte van de navbar hebben */
+}
+
+.navbar-item:hover {
+    color: #ddd;
+    background-color: #575757;
+}
+
+.navbar-text {
+    margin: 0 30px; /* Voeg meer ruimte toe tussen de items */
+    color: white;
+    display: flex;
+    align-items: center; /* Zorg ervoor dat de items verticaal gecentreerd zijn */
+    height: 100%; /* Zorg ervoor dat de items de volledige hoogte van de navbar hebben */
+}

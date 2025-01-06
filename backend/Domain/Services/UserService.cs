@@ -1,5 +1,5 @@
-﻿using Interfaces.IRepos;
-using Interfaces.Models;
+﻿using Interfaces;
+using Interfaces.IRepos;
 using Logic.Entities;
 using Logic.ExtensionMethods;
 
@@ -14,6 +14,13 @@ namespace Logic.Services
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+
+            var users = await _userRepository.GetAllUsersAsync();
+            return users.Select(dto => dto.toUser());
         }
 
         public async Task<User?> Login(string email, string password)

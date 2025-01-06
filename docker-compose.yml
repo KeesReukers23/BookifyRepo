@@ -1,0 +1,49 @@
+services:
+  frontend:
+    image: frontend
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"  
+    env_file:
+    - ./frontend/.env
+    depends_on:
+      - backend 
+    networks:
+      - app-network
+
+  frontend2:
+    image: frontend2
+    container_name: frontend2
+    build:
+      context: ./frontend2
+    ports:
+      - "3001:3000" 
+    env_file:
+      - ./frontend2/.env
+    depends_on:
+      - backend   
+    networks:
+      - app-network
+
+  backend:
+    image: backend
+    container_name: backend
+    build:
+      context: ./  
+      dockerfile: backend/bookify/Dockerfile 
+    ports:
+      - "5169:8080" 
+    environment:
+      - ASPNETCORE_URLS=http://+:8080  
+      - ConnectionStrings__Bookify=Server=mssqlstud.fhict.local;Database=dbi368833_bookify;User Id=dbi368833_bookify;Password=Fretvlemnup3;TrustServerCertificate=true;
+      - JwtSettings__SecretKey=TzYwYk91NkxmVDNhNkczZVRHQXRTY3JpWXRONjNNSXg=
+      - JwtSettings__Issuer=BookifyAPI
+      - JwtSettings__Audience=BookifyClient
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
