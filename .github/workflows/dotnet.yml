@@ -28,8 +28,10 @@ jobs:
       run: dotnet test backend/Bookify.Tests/Bookify.Tests.csproj --no-build --verbosity normal
 
     - name: Build Docker image for backend
+    
+      working-directory: ./backend
       run: |
-        docker build -f /backend/bookify/Dockerfile -t keesreukers23/bookify-backend ./backend
+        docker build -f ./bookify/Dockerfile -t keesreukers23/bookify-backend .
 
     - name: Log in to DockerHub
       uses: docker/login-action@v2
