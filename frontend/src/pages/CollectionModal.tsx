@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CollectionModal.css';
+import apiUrl from '../config/config';
 
 interface Collection {
     collectionId: string;
@@ -24,7 +25,7 @@ const CollectionModal: React.FC<CollectionModalProps> = ({ show, onClose, onAddT
             if (!token || !userId) return;
 
             try {
-                const response = await fetch(`http://localhost:5169/api/Collection/byUser/${userId}`, {
+                const response = await fetch(`${apiUrl}/api/Collection/byUser/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },

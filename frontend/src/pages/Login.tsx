@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Vergeet niet Axios te importeren
 import './Login.css'; // Importing CSS for styling
+import apiUrl from '../config/config';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -24,7 +25,7 @@ const Login: React.FC = () => {
   
     try {
       // Controleer of de juiste URL wordt gebruikt
-      const response = await axios.post('http://localhost:5169/api/User/login', {
+      const response = await axios.post(`${apiUrl}/api/User/login`, {
         email,
         password,
       });

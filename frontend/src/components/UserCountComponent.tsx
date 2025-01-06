@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import * as signalR from '@microsoft/signalr';
+import apiUrl from '../config/config';
 
 const UserCountComponent = () => {
     const [onlineUsers, setOnlineUsers] = useState<number>(0);
 
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl('http://localhost:5169/userCountHub', {
+            .withUrl(`${apiUrl}/userCountHub`, {
                 skipNegotiation: true,
                 transport: signalR.HttpTransportType.WebSockets
             })

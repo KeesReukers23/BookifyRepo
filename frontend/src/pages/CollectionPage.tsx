@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import './CollectionPage.css';
+import apiUrl from '../config/config';
 
 interface Collection {
     collectionId: string;
@@ -18,7 +19,7 @@ const CollectionPage = () => {
     useEffect(() => {
         const fetchCollection = async () => {
             try {
-                const response = await fetch(`http://localhost:5169/api/Collection/${collectionId}`, {
+                const response = await fetch(`${apiUrl}/api/Collection/${collectionId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -39,7 +40,7 @@ const CollectionPage = () => {
 
         const fetchPosts = async () => {
             try {
-                const response = await fetch(`http://localhost:5169/api/Collection/${collectionId}/posts`, {
+                const response = await fetch(`${apiUrl}/api/Collection/${collectionId}/posts`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,

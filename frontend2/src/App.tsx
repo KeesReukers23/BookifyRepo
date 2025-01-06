@@ -6,7 +6,7 @@ import UsersPage from './pages/UsersPage';
 
 const App: React.FC = () => {
     return (
-        <Router basename= '/frontend2'>
+        <Router >
             <Routes>
                 <Route path="/usersPage" element={<UsersPage />} />
             </Routes>

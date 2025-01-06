@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Collections.css';
 import Navbar from './Navbar';
+import apiUrl from '../config/config';
 
 interface Collection {
     collectionId: string;
@@ -37,7 +38,7 @@ const Collections = () => {
 
         const fetchCollections = async () => {
             try {
-                const response = await fetch(`http://localhost:5169/api/Collection/byUser/${userId}`, {
+                const response = await fetch(`${apiUrl}/api/Collection/byUser/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
@@ -68,7 +69,7 @@ const Collections = () => {
 
         setCreatingCollection(true);
         try {
-            const response = await fetch('http://localhost:5169/api/Collection', {
+            const response = await fetch(`${apiUrl}/api/Collection`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,7 +97,7 @@ const Collections = () => {
         if (!token) return;
 
         try {
-            const response = await fetch(`http://localhost:5169/api/Collection/${collectionId}`, {
+            const response = await fetch(`${apiUrl}/api/Collection/${collectionId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
