@@ -111,7 +111,7 @@ jobs:
         docker push keesreukers23/bookify-frontend2:latest
 
 
-   deploy:
+  deploy:
     runs-on: ubuntu-latest
     needs: [build_backend, build_frontend, build_frontend2]  
 
