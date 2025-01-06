@@ -1,5 +1,5 @@
-﻿using Interfaces.IRepos;
-using Interfaces.Models;
+﻿using Interfaces;
+using Interfaces.IRepos;
 using Logic.Entities;
 using Logic.ExtensionMethods;
 using Logic.Services;
