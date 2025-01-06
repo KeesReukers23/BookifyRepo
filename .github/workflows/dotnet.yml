@@ -76,8 +76,7 @@ jobs:
       run: |
         docker tag bookify-frontend keesreukers23/bookify-frontend:latest
         docker push keesreukers23/bookify-frontend:latest
-
-  # Nieuwe frontend2 job
+  
   build_frontend2:
     runs-on: ubuntu-latest
 
