@@ -137,7 +137,7 @@ jobs:
 
     - name: Set up Docker Compose
       run: |
-        docker-compose -f docker-compose.yml up --build 
+        docker-compose -f docker-compose.yml up --build -d
 
     - name: Verify Docker containers are running
       run: |
