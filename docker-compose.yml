@@ -27,8 +27,8 @@ services:
     image: backend
     container_name: backend
     build:
-      context: ./  
-      dockerfile: backend/bookify/Dockerfile 
+      context: ./backend  
+      dockerfile: bookify/Dockerfile 
     ports:
       - "5169:8080" 
     environment:
