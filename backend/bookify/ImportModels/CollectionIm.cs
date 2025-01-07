@@ -4,6 +4,6 @@
     {
         public string Name { get; set; } = string.Empty;
 
-        public Guid UserId { get; set; }
+        public required Guid UserId { get; set; }
     }
 }

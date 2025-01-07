@@ -13,6 +13,7 @@ namespace DataAccess.Repos
         {
             _context = context;
         }
+
         public async Task<Guid?> AddUserAsync(UserDto userDto)
         {
             try
@@ -28,14 +29,14 @@ namespace DataAccess.Repos
             }
         }
 
-        public Task DeleteUserAsync(int userId)
+        public async Task DeleteUserAsync(Guid userId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteUserAsync(Guid userId)
-        {
-            throw new NotImplementedException();
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
@@ -53,11 +54,9 @@ namespace DataAccess.Repos
             return await _context.Users.FindAsync(userId);
         }
 
-        public Task<UserDto?> GetUserByIdASync(Guid userId)
+        public async Task<UserDto?> GetUserByIdASync(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _context.Users.FindAsync(userId);
         }
-
-
     }
 }

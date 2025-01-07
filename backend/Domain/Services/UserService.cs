@@ -8,12 +8,10 @@ namespace Logic.Services
     public class UserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly JwtService _jwtService;
 
-        public UserService(IUserRepository userRepository, JwtService jwtService)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _jwtService = jwtService;
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()

@@ -2,7 +2,7 @@
 {
     public class AddToCollectionIm
     {
-        public Guid CollectionId { get; set; }
-        public Guid PostId { get; set; }
+        public required Guid CollectionId { get; set; }
+        public required Guid PostId { get; set; }
     }
 }

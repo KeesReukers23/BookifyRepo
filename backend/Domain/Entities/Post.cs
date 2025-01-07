@@ -5,9 +5,9 @@
         public Guid PostId { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public float Rating { get; set; }
-        public string Review { get; set; } = string.Empty;
+        public string Review { get; set; }
         public Guid UserId { get; private set; }
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
 
         public ICollection<Collection> Collections { get; set; }
 

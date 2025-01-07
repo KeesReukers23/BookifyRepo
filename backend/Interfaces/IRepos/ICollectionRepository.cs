@@ -1,11 +1,14 @@
-﻿using Interfaces;
-public interface ICollectionRepository
+﻿namespace Interfaces.IRepos
 {
-    Task<CollectionDto?> GetByIdAsync(Guid collectionId);
-    Task<IEnumerable<CollectionDto>> GetAllAsync();
+    public interface ICollectionRepository
+    {
+        Task<CollectionDto?> GetByIdAsync(Guid collectionId);
+        Task<IEnumerable<CollectionDto>> GetAllAsync();
 
-    Task<IEnumerable<CollectionDto>> GetAllByUserIdAsync(Guid userId);
-    Task AddAsync(CollectionDto collection);
-    Task UpdateAsync(CollectionDto collection);
-    Task RemoveAsync(Guid collectionId);
+        Task<IEnumerable<CollectionDto>> GetAllByUserIdAsync(Guid userId);
+        Task AddAsync(CollectionDto dto);
+        Task UpdateAsync(CollectionDto dto);
+        Task RemoveAsync(Guid collectionId);
+    }
+
 }

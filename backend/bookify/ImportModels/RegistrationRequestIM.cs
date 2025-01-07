@@ -6,16 +6,16 @@ namespace bookifyWEBApi.ImportModels
 
     {
         [Required(ErrorMessage = "First name is required.")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Last name is required.")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Password is required.")]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
     }
 }
