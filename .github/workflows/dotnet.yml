@@ -30,9 +30,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        
+    - name: Build tests
+      run: dotnet build backend/Bookify.Tests/Bookify.Tests.csproj --configuration Release
+      
     - name: Run tests
-      run: dotnet test Bookify.Tests/Bookify.Tests.csproj --no-build --verbosity normal
-      working-directory: backend 
+      run: dotnet test backend/Bookify.Tests/Bookify.Tests.csproj --no-build --verbosity normal
+      
 
   # Backend deploy
   deploy_backend:
