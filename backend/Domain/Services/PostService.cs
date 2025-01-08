@@ -32,6 +32,12 @@ namespace Logic.Services
         {
             await _postRepository.AddPostToCollectionAsync(postId, collectionId);
         }
+        public async Task<bool> DeletePostFromCollectionAsync(Guid collectionId, Guid postId)
+        {
+            bool success = await _postRepository.DeletePostFromCollectionAsync(collectionId, postId);
+            return success;
+        }
+
 
         public async Task<Guid?> AddPost(Post post)
         {

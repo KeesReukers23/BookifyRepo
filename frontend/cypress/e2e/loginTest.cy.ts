@@ -11,6 +11,6 @@ describe('template spec', () => {
 
 
     // Wacht tot de homepage wordt geladen
-    cy.url().should('include', '/Home') // Verifieer dat de URL de homepagina is
+    cy.url().should('include', '/home') // Verifieer dat de URL de homepagina is
   })
 })

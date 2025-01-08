@@ -34,5 +34,17 @@
             this.Title = title;
             this.Collections = new List<Collection>();
         }
+
+        //Constructor for retrieving post without Date
+
+        public Post(Guid postId, float rating, string review, Guid userId, string title)
+        {
+            this.PostId = postId;
+            this.Rating = rating;
+            this.Review = review;
+            this.UserId = userId;
+            this.Title = title;
+            this.Collections = new List<Collection>();
+        }
     }
 }

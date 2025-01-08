@@ -106,6 +106,7 @@ namespace bookifyWEBApi.Controllers
 
 
 
+
         //DELETE: api/Collection/{id}
         [HttpDelete("{collectionId}")]
         public async Task<IActionResult> DeleteCollectionAsync(Guid collectionId)
@@ -118,6 +119,19 @@ namespace bookifyWEBApi.Controllers
             }
 
             return NoContent();
+        }
+        // DELETE: api/Collection/{collectionId}/post/{postId}
+        [HttpDelete("{collectionId}/post/{postId}")]
+        public async Task<IActionResult> RemovePostFromCollection(Guid collectionId, Guid postId)
+        {
+            bool success = await _postService.DeletePostFromCollectionAsync(collectionId, postId);
+
+            if (success)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
         }
 
 

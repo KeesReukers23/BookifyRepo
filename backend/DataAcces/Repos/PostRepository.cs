@@ -100,6 +100,26 @@ namespace DataAccess.Repos
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> DeletePostFromCollectionAsync(Guid collectionId, Guid postId)
+        {
+            var collection = await _context.Collections
+                .Include(c => c.Posts)
+                .FirstOrDefaultAsync(c => c.CollectionId == collectionId);
 
+            var post = await _context.Posts.FindAsync(postId);
+
+            if (collection == null || post == null)
+            {
+                throw new ArgumentException("Collection or Post not found.");
+            }
+
+            collection.Posts.Remove(post);
+
+            _context.Entry(collection).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return !collection.Posts.Contains(post);
+        }
     }
 }

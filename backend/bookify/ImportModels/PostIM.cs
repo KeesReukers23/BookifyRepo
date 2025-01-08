@@ -2,7 +2,6 @@
 {
     public class PostIm
     {
-        public required DateTime CreatedAt { get; set; }
         public required float Rating { get; set; }
         public string Review { get; set; } = string.Empty;
         public required Guid UserId { get; set; }

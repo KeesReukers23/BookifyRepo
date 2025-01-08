@@ -14,5 +14,7 @@
         Task<bool> DeletePostAsync(Guid postId);
 
         Task AddPostToCollectionAsync(Guid collectionId, Guid postId);
+
+        Task<bool> DeletePostFromCollectionAsync(Guid collectionId, Guid postId);
     }
 }

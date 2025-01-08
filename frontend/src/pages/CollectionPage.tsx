@@ -75,6 +75,32 @@ const CollectionPage = () => {
         );
     };
 
+    const handleDeletePostFromCollection = async (postId: string) => {
+
+        if (!token) {
+            console.error("User is not authenticated");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${apiUrl}/api/Collection/${collectionId}/post/${postId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete post from collection');
+            }
+
+            setPosts(posts.filter(post => post.postId !== postId));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <div>
             <Navbar />
@@ -95,8 +121,7 @@ const CollectionPage = () => {
                                     <p>{post.review}</p>
                                     {renderStars(post.rating)}
                                     <div className="button-container">
-                                        <button className="button-add">Add to Collection</button>
-                                        <button className="button-delete">Delete</button>
+                                        <button className="button-delete" onClick={() => handleDeletePostFromCollection(post.postId)}>Delete</button>
                                     </div>
                                 </li>
                             ))}

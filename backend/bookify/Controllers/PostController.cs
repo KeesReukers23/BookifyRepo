@@ -103,7 +103,7 @@ namespace bookifyWEBApi.Controllers
         [HttpPut("{postId}")]
         public async Task<ActionResult> UpdatePost(Guid postId, PostIm postIM)
         {
-            Post post = new Post(postId, postIM.CreatedAt, postIM.Rating, postIM.Review, postIM.UserId, postIM.Title);
+            Post post = new Post(postId, postIM.Rating, postIM.Review, postIM.UserId, postIM.Title);
 
             bool updated = await _postService.UpdatePost(post);
 
