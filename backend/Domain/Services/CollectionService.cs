@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Interfaces.IRepos;
 using Logic.Entities;
 using Logic.ExtensionMethods;
 
@@ -40,7 +41,7 @@ namespace Logic.Services
 
         public async Task<Collection?> UpdateCollectionAsync(Guid collectionId, string newName)
         {
-            CollectionDto dto = await _collectionRepository.GetByIdAsync(collectionId);
+            CollectionDto? dto = await _collectionRepository.GetByIdAsync(collectionId);
             if (dto == null) { return null; }
 
             dto.Name = newName;
@@ -50,7 +51,7 @@ namespace Logic.Services
 
         public async Task<bool> DeleteCollectionAsync(Guid collectionId)
         {
-            CollectionDto dto = await _collectionRepository.GetByIdAsync(collectionId);
+            CollectionDto? dto = await _collectionRepository.GetByIdAsync(collectionId);
             if (dto == null) return false;
 
             await _collectionRepository.RemoveAsync(collectionId);
