@@ -11,9 +11,9 @@ namespace bookifyWEBApi.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-
         private readonly UserService _userService;
         private readonly JwtService _jwtService;
+
         public UserController(UserService userService, JwtService jwtService)
         {
             _userService = userService;
@@ -47,17 +47,22 @@ namespace bookifyWEBApi.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegistrationRequestIm registrationRequestIM)
         {
-            if (!ModelState.IsValid) { return BadRequest(ModelState); } //validation errors
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // validation errors
+            }
 
-
-            if (registrationRequestIM == null) { return BadRequest("User input model cannot be null."); }
+            if (registrationRequestIM == null)
+            {
+                return BadRequest("User input model cannot be null.");
+            }
 
             bool userExists = await _userService.UserExistsByEmailASync(registrationRequestIM.Email);
 
             if (userExists)
             {
                 return Conflict(new { Message = "A user with this email already exists." });
-            };
+            }
 
             User user = registrationRequestIM.ToUser();
 
@@ -75,12 +80,19 @@ namespace bookifyWEBApi.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginRequestIm loginRequestIM)
         {
-            if (!ModelState.IsValid) { return BadRequest(ModelState); } //validation errors
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // validation errors
+            }
 
             try
             {
-                User? user = await _userService.Login(loginRequestIM.Email, loginRequestIM.Password); //NULL if login failed.
-                if (user == null) { return Unauthorized("Invalid credentials."); }
+                User? user = await _userService.Login(loginRequestIM.Email, loginRequestIM.Password); // NULL if login failed.
+                if (user == null)
+                {
+                    return Unauthorized("Invalid credentials.");
+                }
+
                 UserEx userEx = new UserEx()
                 {
                     UserId = user.UserId,
@@ -89,14 +101,9 @@ namespace bookifyWEBApi.Controllers
                     Email = user.Email
                 };
 
-                if (user != null)
-                {
-                    string token = _jwtService.GenerateToken(user.UserId);
+                string token = _jwtService.GenerateToken(user.UserId);
 
-                    return Ok(new { Token = token, User = userEx });
-                }
-
-                return Unauthorized("Invalid credentials");
+                return Ok(new { Token = token, User = userEx });
             }
             catch
             {

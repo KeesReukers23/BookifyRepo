@@ -18,7 +18,7 @@ namespace Bookify.Tests.UnitTests.Logic.Services
         {
             _mockUserRepository = new Mock<IUserRepository>();
             _jwtService = new JwtService("your-secret-key", "your-issuer", "your-audience");
-            _userService = new UserService(_mockUserRepository.Object, _jwtService);
+            _userService = new UserService(_mockUserRepository.Object);
         }
 
         [Fact]

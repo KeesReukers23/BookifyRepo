@@ -3,7 +3,7 @@
     public class Collection
     {
         public Guid CollectionId { get; private set; }
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         public Guid UserId { get; private set; }
 
         public ICollection<Post> Posts { get; set; }

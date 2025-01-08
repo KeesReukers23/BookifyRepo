@@ -111,4 +111,4 @@ app.UseWebSockets();
 
 app.MapGet("/", () => "huts");
 
-app.Run();
+await app.RunAsync();
